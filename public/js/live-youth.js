@@ -105,18 +105,17 @@
 
 	// 活动详情
 	if (href.search('detail.html')>0) {
-		var id = href.split('#')[1]
+		var id = utils.parseHash().id
 
 		$.get('http://vht.cloudliving.net/index.php?m=Community&c=Index&a=act&action=act_detail&id='+id,{uid:uid},function(data){
 			var data = JSON.parse(data), 
 				temp, 
 				obj = {},
-				type = data.result.status_num
-
-			console.log(data)
+				type	
 
 			if (data.Code != '0') { $.tips({content:data.errorMessage + '请刷新重试'}); return}
 
+			type = data.result.status_num
 			// 整理数据
 			obj.title = data.result.title
 			obj.heat = data.result.heat

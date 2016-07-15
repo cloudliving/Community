@@ -21,7 +21,7 @@
 	<div id="wrapper">
 		<div class="head">茶岗社区</div>
 		<div class="content">
-			<a href="../../html/social/annouce.html" class="annouce-link">社区公告栏>>></a>
+			<a href="../social/annouce.html" class="annouce-link">社区公告栏>>></a>
 			<div class="recruit">
 				<div class="rec-tit">
 					社区招募
@@ -34,19 +34,19 @@
 		<div class="g-bottom-nav">
 			<ul class="clearfix">
 				<li>
-					<a href="../../html/index.html">
+					<a href="../index.html">
 						<span class="icon-coffee"></span>
 						<p>生活</p>
 					</a>
 				</li>
 				<li class="current">
-					<a href="../../html/social/index.html">
+					<a href="../social/index.html">
 						<span class="icon-house-1"></span>
 						<p>社圈</p>
 					</a>
 				</li>
 				<li>
-					<a href="../../html/myself/index.html">
+					<a href="../myself/index.html">
 						<span class="icon-user-1"></span>
 						<p>我</p>
 					</a>
@@ -70,6 +70,18 @@
 					$.tips({content:data['errorMessage']});
 				}
 			},"json");
+
+			$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=department&action=my_department",{uid: uid},function(data){
+				console.log(data);
+				if(data['Code']==0){
+					$('.head').text(data['result'][0]['title']);
+					utils.loading();
+				}else{
+					utils.loading();
+					$.tips({content:data['errorMessage']});
+				}
+			},"json");
+
 		})();
 	</script>
 </body>

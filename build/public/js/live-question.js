@@ -41,6 +41,13 @@ $(function(){
 		}
 
 	if (href.search('index.html') >= 0) {
+		// 定位社区
+		$.get('http://vht.cloudliving.net/index.php?m=Community&c=Index&a=department&action=my_department', {uid:uid},function(data){
+			var data = JSON.parse(data)
+			if (data.Code != '0') { $.tips({content:data.errorMessage + '请刷新重试'}); return}
+			$('.cummu').text(data.result[0].title)
+		})
+
 		$.get('http://vht.cloudliving.net/index.php?m=Community&c=Index&a=question&action=question', {uid: uid}, function(res){
 			var data = JSON.parse(res), str
 			if (data.Code != 0) { $.tips({content:data.errorMessage + '请刷新重试'}); return}
@@ -57,6 +64,7 @@ $(function(){
 			if (data.Code != 0) { $.tips({content:data.errorMessage + '请刷新重试'}); return}
 
 			$('#wrapper').append(template.detail.format(data.result))
+			utils.loading()
 		})
 	}
 

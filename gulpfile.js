@@ -3,7 +3,8 @@ var concat = require("gulp-concat");
 var csso = require("gulp-csso");
 var replace = require("gulp-replace");
 var build = require("gulp-html-replace");
-
+var time = new Date().valueOf();
+var sftp = require('gulp-sftp');
 
 // 合并css
 gulp.task("concatCss", function() {
@@ -44,12 +45,25 @@ gulp.task('moveimg', function() {
 gulp.task('replace', function() {
     gulp.src(['./html/*.html', './html/**/*.html', './html/**/**/*.html'])
         .pipe(replace(/(\.\.\/){0,4}public/g, 'http://cloudliving-img.b0.upaiyun.com/static/Home/Community'))
+        .pipe(replace(/src=".+\.js/g, function(a){return a+'?v='+time}))
         .pipe(build({
-            'css':'http://cloudliving-img.b0.upaiyun.com/static/Home/Community/css/community.min.css'
+            'css':'http://cloudliving-img.b0.upaiyun.com/static/Home/Community/css/community.min.css?v='+time
         }))
         .pipe(gulp.dest('./build/html/'));
 });
 
+
+// 上传到测试服务器
+gulp.task('uploadtest', function(){
+    gulp.src(['build/html/*.html', 'build/html/**/*.html'])
+        .pipe(sftp({
+            host: '120.27.161.102',
+            port: 22,
+            user: 'root',
+            pass: 'Ruan0810',
+            remotePath: '/cloudliving/dingzhiqiang/sq'
+        }))
+})
 
 
 

@@ -56,7 +56,7 @@
 				$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=department&action=join_department&did=DID",{did: did,uid: uid},function(data){
 					console.log(data);
 					if(data['Code']==0){
-						location.href = "../../html/index.html";
+						location.href = "../index.html#uid="+uid;
 					}else{
 						$.tips({content: data['errorMessage']});
 					}

@@ -104,7 +104,7 @@
 				if(data['Code']==0){
 					console.log(data);
 				}else{
-					// location.href = "select/index.html#uid="+uid;
+					location.href = "select/index.html#uid="+uid;
 				}
 			},"json");
 			$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=act&action=act_recommend",{uid: uid},function(data){

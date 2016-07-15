@@ -83,10 +83,11 @@
 						var data = JSON.parse(data)
 						if (data.Code != '0') { $.tips({content:data.errorMessage + '请重试'}); return}
 
-						location.href = './result.html#id='+hash.id+'&name='+name+'&phone='+phone+'&type='+hash.type
+						location.href = './result.html#id='+hash.id+'&name='+name+'&phone='+phone+'&type='+hash.type+'&uid='+uid
 					})
 				} else {
-					location.href = './pay.html#id='+hash.id+'&name='+name+'&phone='+phone+'&type='+hash.type
+					// location.href = './pay.html#id='+hash.id+'&name='+name+'&phone='+phone+'&type='+hash.type
+					localtion.href = 'http://weixin.cloudliving.net/index.php?m=CAPI&c=Index&a=index&id='+id+'&uid='+uid
 				}
 			})
 

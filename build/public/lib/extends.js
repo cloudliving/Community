@@ -98,7 +98,8 @@ var uid = (utils.parseHash() && utils.parseHash().uid) || 108391
 	})
 
 	function add(){
-		$('a').not('.finished').on('tap', function(){
+		$('a').not('.finished').on('click', function(e){
+			e.preventDefault()
 			var href = $(this).attr('href')
 
 			if (href.search('#')>0) {
