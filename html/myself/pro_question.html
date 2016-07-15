@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" class="page-question">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telphone=no, email=no"/>
+	<title>问题汇集</title>
+	
+	<script src="../../public/lib/flexible.js"></script>
+	<link rel="stylesheet" href="../../public/lib/frozen.min.css">
+	<!-- build:css -->
+	<link rel="stylesheet" href="../../public/css/common.css">
+	<link rel="stylesheet" href="../../public/css/question.css">
+	<!-- endbuild -->
+</head>
+<body>
+	
+	<div id="wrapper" data-loading="complate">
+		<ul class="question-list"></ul>
+	</div>
+
+
+
+
+	<script src="../../public/lib/zepto.min.js"></script>
+	<script src="../../public/lib/frozen.min.js"></script>
+	<script src="../../public/lib/extends.js"></script>
+	<script>
+		var template = '<!-- data-repeat -->'+
+						'<li class="item" data-repeat="x in list">'+
+							'<a href="../live/question/detail.html#id=x.id">'+
+								'<div class="top">'+
+									'<img class="thumb" src="x.image" alt="">'+
+									'<div class="wrap">'+
+										'<p class="title">x.title</p>'+
+										'<p class="time">x.ctime</span>'+
+									'</div>'+
+								'</div>'+
+								'<p class="bottom"><span class="type">x.type_name</span><span class="status">x.status</span></p>'+
+							'</a>'+
+						'</li>'+
+						'<!-- end data-repeat -->',
+			str
+
+		$.get('http://vht.cloudliving.net/index.php?m=Community&c=Index&a=question&action=my_question', {uid: uid}, function(res){
+			var data = JSON.parse(res), str
+			if (data.Code != 0) { $.tips({content:data.errorMessage + '请刷新重试'}); return}
+
+			str = data.result.myQuestionList.length == 0 ? '<p class="none">暂无数据</p>' : template.format({list: data.result.myQuestionList})
+			$('.question-list').append(str)
+			utils.loading()
+		})
+	</script>
+</body>
+</html>

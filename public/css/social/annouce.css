@@ -1,0 +1,53 @@
+body.soc-ann {
+	background-color: #efeff4;
+}
+.soc-ann .head {
+	height: 0.88rem;
+	line-height: 0.88rem;
+	text-align: center;
+	font-size: 16px;
+	background-color: #e6e6e9;
+}
+.soc-ann .item {
+	display: block;
+	margin-bottom: 0.26rem;
+	padding: 0.32rem 0.2rem;
+	background-color: #fff;
+}
+.soc-ann .ann-tit {
+	font-size: 14px;
+	color: #000;
+}
+.soc-ann .ann-date {
+	font-size: 14px;
+	color: #29d691;
+	text-align: right;
+}
+.soc-ann .ann-con {
+	margin-top: 0.24rem;
+	font-size: 12px;
+	color: #4d4d4d;
+}
+.soc-ann .ann-con p {
+	text-indent: 2em;
+	line-height: 1.8em;
+}
+.soc-ann .pic {
+	float: left;
+	width: 50%;
+	padding: 0.16rem 0.16rem 0 0.16rem;
+}
+.soc-ann .pic img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+.soc-ann .thumbs {
+	margin-top: 0.16rem;
+}
+.soc-ann .thumbs span {
+	float: right;
+	margin-left: 0.08rem;
+	font-size: 14px;
+	color: #7d7d7d;
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telphone=no, email=no"/>
+	<title>活动报名信息</title>
+	
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/flexible.js"></script>
+	<link rel="stylesheet" href="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/frozen.min.css">
+	<link rel="stylesheet" href="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/css/community.min.css">
+
+</head>
+<body class="my-actinfo">
+	
+	<!-- 内容容器 所有的内容都要放在这个div下 -->
+	<div id="wrapper">
+		<div class="contain">
+			<div class="act-info">
+				<!-- <p class="title">功夫高手亲自传授台传导</p>
+				<p class="ctime">6月29日</p>
+				<div class="info">
+					<p><span>编号</span>123</p>
+					<p><span>项目时间</span>2016.7.15-2016.8.31</p>
+					<p><span>费用</span>600</p>
+					<p><span>报名编号</span>2433534</p>
+				</div> -->
+			</div>
+			<div class="block">
+				<div class="direct">预留联系信息</div>
+				<div class="bmain">
+					<div class="item">
+						<label>姓名</label>
+						<p class="key">
+							<input class="text-right" type="text" readonly="" value="小新" id="name">
+						</p>
+					</div>
+					<div class="item">
+						<label>手机号</label>
+						<p class="key">
+							<input class="text-right" type="text" readonly="" value="13324567890" id="phone">
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="sub-btn">
+				<a href="../../html/myself/mod_info.html" class="modify">更改预留消息</a>
+			</div>
+		</div>
+	</div>
+
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/zepto.min.js"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/frozen.min.js"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/extends.js"></script>
+	<script>
+		(function(){
+			var para = utils.parseHash();
+			$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=act&action=my_act_detail",{id: para['id'],uid: uid},function(data){
+				console.log(data);
+				if(data['Code']==0){
+					var s = '<p class="title">'+data['result']['title']+'</p>'+
+							'<p class="ctime">'+data['result']['ctime']+'</p>'+
+							'<div class="info">'+
+								'<p><span>编号</span>'+data['result']['id']+'</p>'+
+								'<p><span>项目时间</span>'+data['result']['setime']+'</p>'+
+								'<p><span>费用</span>'+data['result']['fee']+'</p>'+
+								'<p><span>报名编号</span>'+data['result']['join_id']+'</p>'+
+							'</div>';
+					$('.act-info').append(s);
+					$('#name').val(data['result']['linkman']);
+					$('#phone').val(data['result']['phone']);
+					$('.modify').attr('href',"../../html/myself/mod_info.html#id="+data['result']['id']);
+					utils.loading();
+				}else{
+					utils.loading();
+					$.tips({content: data['errorMessage']});
+				}
+			},"json");
+		})();
+	</script>
+</body>
+</html>

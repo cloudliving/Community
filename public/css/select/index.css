@@ -1,0 +1,57 @@
+body.sel-index {
+	background-color: #fef5d2;
+}
+.sel-index .head {
+	padding: 0.8rem 0.4rem;
+	text-align: center;
+}
+.sel-index .head img {
+	width: 100%;
+	height: auto;
+}
+.sel-index .content {
+	position: relative;
+}
+.sel-index .avatar {
+	position: absolute;
+	left: 0.3rem;
+	top: 0;
+	width: 0.8rem;
+	height: 0.8rem;
+	border-radius: 0.4rem;
+	overflow: hidden;
+}
+.sel-index .avatar img {
+	width: 100%;
+	height: 100%;
+}
+.sel-index .guide {
+	padding: 0 0.98rem 0 1.3rem;
+}
+.sel-index .tit {
+	font-size: 16px;
+	line-height: 0.8rem;
+}
+.sel-index .con p {
+	font-size: 14px;
+	line-height: 1.8em;
+}
+.sel-index .con p:nth-child(1) {
+	margin-top: 0.1rem;
+}
+.sel-index .con p:not(:first-child) {
+	margin-top: 0.62rem;
+}
+.sel-index .select {
+	margin-top: 1rem;
+	padding: 0.4rem 0.48rem;
+}
+.sel-index .select a {
+	display: block;
+	height: 0.68rem;
+	line-height: 0.68rem;
+	background-color: #50d2c2;
+	border-radius: 0.34rem;
+	text-align: center;
+	color: #fff;
+}

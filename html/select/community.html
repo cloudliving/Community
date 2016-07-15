@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telphone=no, email=no"/>
+	<title>选择社区</title>
+	
+	<script src="../../public/lib/flexible.js"></script>
+	<link rel="stylesheet" href="../../public/lib/frozen.min.css">
+	<!-- build:css -->
+	<link rel="stylesheet" href="../../public/css/common.css">
+	<link rel="stylesheet" href="../../public/css/select/area.css">
+	<!-- endbuild -->
+</head>
+<body class="sel-area">
+	
+	<!-- 内容容器 所有的内容都要放在这个div下 -->
+	<div id="wrapper">
+		<div class="head">
+			武汉
+		</div>
+		<div class="content">
+			<!-- <a href="#" class="item">汉口区<span class="icon-arrow-down-1"></span></a> -->
+		</div>
+	</div>
+
+	<script src="../../public/lib/zepto.min.js"></script>
+	<script src="../../public/lib/forzen.min.js"></script>
+	<script src="../../public/lib/extends.js"></script>
+	<script>
+		(function(){
+			var para = utils.parseHash();
+			$('.head').text("武汉>"+decodeURIComponent(para['str']));
+			$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=department&action=get_department",{pid:para['id'], uid:uid},function(data){
+				console.log(data);
+				//请求数据成功
+				if(data['Code']==0){
+					var s = '<!-- data-repeat -->'+
+							'<a href="javascript:" class="item" data-repeat="x in result" data-did="x.id">x.title<span class="icon-arrow-down-1" ></span></a>'+
+							'<!-- end data-repeat -->'
+					var temp = s.format(data);
+					$('.content').append(temp);
+					utils.loading();
+				}else {//请求数据失败
+					utils.loading();
+					$.tips({content:data['errorMessage']});
+				}
+			},"json");
+
+			//加入社区
+			$(document).on('tap','.item',function(){
+				var did = $(this).data('did');
+				$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=department&action=join_department&did=DID",{did: did,uid: uid},function(data){
+					console.log(data);
+					if(data['Code']==0){
+						location.href = "../../html/index.html";
+					}else{
+						$.tips({content: data['errorMessage']});
+					}
+				},"json");
+			});
+			
+		})();
+	</script>
+</body>
+</html>

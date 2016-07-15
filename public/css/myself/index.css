@@ -1,0 +1,75 @@
+body.my-index {
+	background-color: #efefef;
+}
+.my-index #wrapper {
+	padding-bottom: 1.2rem;
+}
+.my-index .block {
+	margin-top: 0.2rem;
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	background-color: #fff;
+}
+.my-index .block .item:last-child {
+	border-bottom: none;
+}
+.my-index .item {
+	position: relative;
+	display: block;
+	padding: 0.25rem 0.34rem 0.25rem 0;
+	margin-left: 0.3rem;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.my-index .item p {
+	display: inline-block;
+	color: #020202;
+}
+.my-index .item .icon-arrow-down-1 {
+	position: absolute;
+	top: 50%;
+	right: 0.34rem;
+	margin-top: -8px;
+	font-size: 16px;
+	color: #c5c5c6;
+	-webkit-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
+	transform: rotate(-90deg);
+}
+.my-index .item-icon {
+	margin-right: 0.34rem;
+	float: left;
+}
+.my-index p.community {
+	float: right;
+	width: 3rem;
+	text-align: right;
+	font-size: 14px;
+	color: #07b470;
+	line-height: 20px;
+}
+.my-index .avatar {
+	float: left;
+	margin-left: -0.1rem;
+	width: 0.9rem;
+	height: 0.9rem;
+	border: 1px solid #afafaf;
+	border-radius: 0.45rem;
+	overflow: hidden;
+}
+.my-index .avatar img {
+	width: 100%;
+	height: 100%;
+}
+.my-index .name {
+	float: left;
+	line-height: 0.9rem;
+	margin: 0 0.2rem 0 0.22rem;
+	font-size: 14px;
+	color: #000;
+}
+.my-index .user {
+	float: left;
+	line-height: 0.9rem;
+	color: #fb6d44;
+}

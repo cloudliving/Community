@@ -1,0 +1,34 @@
+.sel-area .head {
+	padding: 0 0.2rem;
+	height: 1rem;
+	line-height: 1rem;
+	font-size: 16px;
+	color: #333;
+}
+.sel-area .content .item:last-child {
+	border-bottom: none;
+}
+.sel-area .item {
+	position: relative;
+	display: block;
+	width: 100%;
+	padding: 0 0.2rem;
+	height: 0.98rem;
+	line-height: 0.98rem;
+	background-color: #fff;
+	border-bottom: 1px solid #e6e6e6;
+	font-size: 16px;
+	color: #646464;
+}
+.sel-area .item span {
+	display: inline-block;
+	line-height: 1;
+	position: absolute;
+	top: 50%;
+	right: 0.2rem;
+	margin-top: -8px;
+	-webkit-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
+	transform: rotate(-90deg);
+}

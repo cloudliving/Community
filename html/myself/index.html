@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telphone=no, email=no"/>
+	<title>我</title>
+	
+	<script src="../../public/lib/flexible.js"></script>
+	<link rel="stylesheet" href="../../public/lib/frozen.min.css">
+	<!-- build:css -->
+	<link rel="stylesheet" href="../../public/css/common.css">
+	<link rel="stylesheet" href="../../public/css/myself/index.css">
+	<!-- endbuild -->
+</head>
+<body class="my-index">
+	
+	<!-- 内容容器 所有的内容都要放在这个div下 -->
+	<div id="wrapper">
+		<div class="contain">
+			<div class="block">
+				<div href="#" class="item clearfix">
+					<div class="avatar">
+						<img src="../../public/images/nav-youth.png">
+					</div>
+					<p class="name">小新</p>
+					<span class="icon-user user"></span>
+				</div>
+			</div>
+			<div class="block">
+				<div href="#" class="item clearfix">
+					<span class="icon-house item-icon" style="color: #07b470;"></span>
+					<p>社区</p>
+					<p class="community"></p>
+				</div>
+			</div>
+			<div class="block">
+				<a href="pro_act.html" class="item clearfix">
+					<span class="icon-ball item-icon" style="color: #0eacfc;"></span>
+					<p>项目活动</p>
+					<span class="icon-arrow-down-1"></span>
+				</a>
+				<a href="pro_question.html" class="item clearfix">
+					<span class="icon-share item-icon" style="color: #0eacfc;"></span>
+					<p>上报问题</p>
+					<span class="icon-arrow-down-1"></span>
+				</a>
+				<a href="pro_mpmt.html" class="item clearfix">
+					<span class="icon-cap item-icon" style="color: #0eacfc;"></span>
+					<p>群防群治</p>
+					<span class="icon-arrow-down-1"></span>
+				</a>
+			</div>
+			<div class="block">
+				<a href="#" class="item clearfix">
+					<span class="icon-question item-icon" style="color: #fb6d44;"></span>
+					<p>帮助</p>
+					<span class="icon-arrow-down-1"></span>
+				</a>
+			</div>
+		</div>
+		<div class="g-bottom-nav">
+			<ul class="clearfix">
+				<li>
+					<a href="../../html/index.html">
+						<span class="icon-coffee"></span>
+						<p>生活</p>
+					</a>
+				</li>
+				<li>
+					<a href="../../html/social/index.html">
+						<span class="icon-house-1"></span>
+						<p>社圈</p>
+					</a>
+				</li>
+				<li class="current">
+					<a href="../../html/myself/index.html">
+						<span class="icon-user-1"></span>
+						<p>我</p>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<script src="../../public/lib/zepto.min.js"></script>
+	<script src="../../public/lib/frozen.min.js"></script>
+	<script src="../../public/lib/extends.js"></script>
+	<script>
+		(function(){
+			//获得社区
+			$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=department&action=my_department", {uid:uid}, function(data){
+				console.log(data);
+				if(data['Code']==0){
+					$('.community').text(data['result'][0]['title']);
+					utils.loading();
+				}else{
+					$.tips({content: data['errorMessage']});
+				}
+			},"json");
+
+			//获得头像呢称
+			$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=user&action=my_info", {uid:uid}, function(data){
+				console.log(data);
+				if(data['Code']==0){
+					$('.avatar img').attr('src',data['result']['avatar']);
+					$('.name').text(data['result']['nickname']);
+				}
+			},"json");
+		})();
+	</script>
+</body>
+</html>

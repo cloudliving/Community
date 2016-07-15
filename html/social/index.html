@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telphone=no, email=no"/>
+	<title>社圈</title>
+	
+	<script src="../../public/lib/flexible.js"></script>
+	<link rel="stylesheet" href="../../public/lib/frozen.min.css">
+	<!-- build:css -->
+	<link rel="stylesheet" href="../../public/css/common.css">
+	<link rel="stylesheet" href="../../public/css/social/index.css">
+	<!-- endbuild -->
+</head>
+<body class="soc-index">
+	
+	<!-- 内容容器 所有的内容都要放在这个div下 -->
+	<div id="wrapper">
+		<div class="head">茶岗社区</div>
+		<div class="content">
+			<a href="../../html/social/annouce.html" class="annouce-link">社区公告栏>>></a>
+			<div class="recruit">
+				<div class="rec-tit">
+					社区招募
+				</div>
+				<div class="rec-con">
+					<img src="../../public/images/demo-3.png">
+				</div>
+			</div>
+		</div>
+		<div class="g-bottom-nav">
+			<ul class="clearfix">
+				<li>
+					<a href="../../html/index.html">
+						<span class="icon-coffee"></span>
+						<p>生活</p>
+					</a>
+				</li>
+				<li class="current">
+					<a href="../../html/social/index.html">
+						<span class="icon-house-1"></span>
+						<p>社圈</p>
+					</a>
+				</li>
+				<li>
+					<a href="../../html/myself/index.html">
+						<span class="icon-user-1"></span>
+						<p>我</p>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<script src="../../public/lib/zepto.min.js"></script>
+	<script src="../../public/lib/frozen.min.js"></script>
+	<script src="../../public/lib/extends.js"></script>
+	<script>
+		(function(){
+			$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=recruition&action=recruition",{uid:uid},function(data){
+				console.log(data);
+				if(data['Code']==0){
+					$('.rec-con img').attr('src',data['result']['recruition'][0]['image']);
+					utils.loading();
+				}else{
+					utils.loading();
+					$.tips({content:data['errorMessage']});
+				}
+			},"json");
+		})();
+	</script>
+</body>
+</html>

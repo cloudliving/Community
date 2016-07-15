@@ -1,0 +1,98 @@
+body.my-actinfo {
+	background-color: #efefef;
+}
+.my-actinfo .contain .block {
+	border-bottom: 1px solid #e8e8e8;
+}
+.my-actinfo .direct {
+	padding: 0.3rem 0.2rem 0.2rem 0.2rem;
+	color: #9c9c9c;
+	font-size: 14px;
+}
+.my-actinfo .bmain {
+	background-color: #fff;
+}
+.my-actinfo .bmain .item:not(:last-child) {
+	border-bottom: 1px solid #e8e8e8;
+}
+.my-actinfo .item {
+	position: relative;
+	margin-left: 0.2rem;
+	padding: 0.2rem 0;
+}
+.my-actinfo .item label {
+	position: absolute;
+	top: 0.2rem;
+	left: 0;
+	display: inline-block;
+	width: 90px;
+}
+.my-actinfo .item p.key {
+	margin-left: 90px;
+	margin-right: 0.2rem;
+}
+.my-actinfo .item p.key input {
+	width: 100%;
+	border: none;
+	height: 18px;
+	line-height: 18px;
+	color: #969696;
+}
+.my-actinfo .text-left {
+	text-align: left;
+}
+.my-actinfo .text-right {
+	text-align: right;
+}
+.my-actinfo .sub-btn {
+	margin-top: 0.8rem;
+	padding: 0 0.2rem;
+}
+.my-actinfo .sub-btn a {
+	display: block;
+	height: 0.8rem;
+	line-height: 0.8rem;
+	background-color: #38d397;
+	text-align: center;
+	color: #fff;
+}
+
+.my-actinfo .act-info {
+	padding: 0.2rem;
+	background-color: #fff;
+}
+.my-actinfo .title {
+	font-size: 18px;
+}
+.my-actinfo .ctime {
+	text-align: right;
+	font-size: 14px;
+	color: #5a5a5a;
+}
+.my-actinfo .info p {
+	line-height: 28px;
+	color: #38d397;
+}
+.my-actinfo .info p span {
+	display: inline-block;
+	width: 90px;
+	color: #000;
+}
+.my-actinfo p.key.code {
+	margin-right: 90px;
+}
+.my-actinfo #getcode {
+	position: absolute;
+	top: 50%;
+	right: 0.2rem;
+	margin-top: -12px;
+	display: inline-block;
+	width: 80px;
+	height: 24px;
+	line-height: 24px;
+	background-color: #fd8462;
+	text-align: center;
+	font-size: 12px;
+	color: #fff;
+	border-radius: 3px;
+}

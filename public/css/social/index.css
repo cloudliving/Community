@@ -1,0 +1,41 @@
+body.soc-index {
+	background-color: #fff;
+}
+.soc-index #wrapper {
+	padding-bottom: 1.2rem;
+}
+.soc-index .head {
+	height: 0.72rem;
+	line-height: 0.72rem;
+	text-align: center;
+	font-size: 14px;
+	background-color: #e6e6e9;
+}
+.soc-index .content {
+	padding: 0.26rem 0.2rem;
+}
+.soc-index .annouce-link {
+	display: block;
+	width: 100%;
+	height: 0.8rem;
+	line-height: 0.8rem;
+	background-color: #10aefe;
+	text-align: center;
+	font-size: 16px;
+	color: #fff;
+}
+.soc-index .recruit {
+	margin-top: 0.34rem;
+}
+.soc-index .rec-tit {
+	padding-left: 0.1rem;
+	border-left: 3px solid #10afff;
+	font-size: 14px;
+}
+.soc-index .rec-con {
+	margin-top: 0.22rem;
+}
+.soc-index .rec-con img {
+	width: 100%;
+	height: auto;
+}

@@ -1,0 +1,75 @@
+* {-webkit-box-sizing: border-box; box-sizing: border-box;}
+body {background: #f0eff5; line-height: 1.14;}
+input {-webkit-border-radius: 0; border-radius: 0;-webkit-appearance: none; }
+#wrapper {display: none; max-width: 750px; margin: 0 auto;}
+#loading {position: fixed; z-index: 998; top: 0; left: 0; width: 100%; height: 100%; background: #f8fafa url('../../public/images/loading.gif') center/3.5rem no-repeat;}
+.clearfix:after {clear: both; content: '.'; display: block; visibility: hidden; height: 0;}
+.ui-poptips-cnt i {display: none;}
+.none {line-height: 100px; text-align: center; color: #ff9d46;}
+
+/* animation */
+.fadein {display: block !important; -webkit-animation: 1s ease-out backwards; animation: 1s ease-out backwards; -webkit-animation-name: fadein; -moz-animation-name: fadein; -ms-animation-name: fadein; animation-name: fadein;}
+@-webkit-keyframes fadein{
+    0%{opacity:0;}
+    100%{opacity:1;}
+}
+@keyframes fadein{
+    0%{opacity:0;}
+    100%{opacity:1;}
+}
+
+
+/* icon */
+@font-face {
+    font-family: 'icomoon';
+    src:    url('../../public/fonts/icomoon.eot?mobrhs');
+    src:    url('../../public/fonts/icomoon.eot?mobrhs#iefix') format('embedded-opentype'),
+        url('../../public/fonts/icomoon.ttf?mobrhs') format('truetype'),
+        url('../../public/fonts/icomoon.woff?mobrhs') format('woff'),
+        url('../../public/fonts/icomoon.svg?mobrhs#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: inherit;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-arrow-down-1:before {content: '\e909';}
+.icon-heart:before {content: '\e908';}
+.icon-cap:before {content: '\e900';}
+.icon-clock:before {content: '\e901';}
+.icon-coffee:before {content: '\e902';}
+.icon-fire:before {content: '\e903';}
+.icon-house:before {content: '\e904';}
+.icon-house-1:before {content: '\e905';}
+.icon-position:before {content: '\e906';}
+.icon-question:before {content: '\e907';}
+.icon-search:before {content: '\e90a';}
+.icon-share:before {content: '\e90b';}
+.icon-user:before {content: '\e90c';}
+.icon-user-1:before {content: '\e90d';}
+.icon-ball:before {content: '\e90f';}
+
+/* 底部固定导航 */
+.g-bottom-nav {position: fixed; bottom: 0; left: 0; width: 100%; padding: .15rem 0; border-top: 1px solid #cdcdcd;background-color: rgba(255, 255, 255, .98); }
+.g-bottom-nav ul {position: relative;}
+.g-bottom-nav ul li {display: block; width: 33.3%; text-align: center;}
+.g-bottom-nav ul li:nth-child(1) {position: absolute; top: 0; left: 0;}
+.g-bottom-nav ul li:nth-child(2) {margin: 0 auto;}
+.g-bottom-nav ul li:nth-child(3) {position: absolute; top: 0; right: 0;}
+.g-bottom-nav ul li a {color: #4d4d4d;}
+.g-bottom-nav ul li a span {font-size: .44rem;}
+.g-bottom-nav ul li a p {margin-top: .08rem; font-size: 12px;}
+.g-bottom-nav ul li.current a {color: #10afff;}
