@@ -51,12 +51,12 @@
 			},"json");
 
 			//加入社区
-			$(document).on('tap','.item',function(){
+			$(document).on('click','.item',function(){
 				var did = $(this).data('did');
 				$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=department&action=join_department&did=DID",{did: did,uid: uid},function(data){
 					console.log(data);
 					if(data['Code']==0){
-						location.href = "../index.html#uid="+uid;
+						location.href = "../index.html?uid="+uid;
 					}else{
 						$.tips({content: data['errorMessage']});
 					}

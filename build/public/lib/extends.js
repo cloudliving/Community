@@ -77,10 +77,10 @@ utils.loading = (function(){
 
 // 解析hash
 utils.parseHash = function(){
-	var hash = (arguments[0] || location.hash).slice(1), obj = {}
-	if (!hash) return
+	var search = (arguments[0] || location.search).slice(1), obj = {}
+	if (!search) return
 
-	hash.split('&').forEach(function(e){
+	search.split('&').forEach(function(e){
 		obj[e.split('=')[0]] = e.split('=')[1]
 	})
 	
@@ -102,10 +102,10 @@ var uid = (utils.parseHash() && utils.parseHash().uid) || 108391
 			e.preventDefault()
 			var href = $(this).attr('href')
 
-			if (href.search('#')>0) {
+			if (href.indexOf("?")>0) {
 				location.href = href + '&uid=' + uid
 			} else {
-				location.href = href + '#uid=' + uid
+				location.href = href + '?uid=' + uid
 			}
 		}).addClass('finished')
 	}

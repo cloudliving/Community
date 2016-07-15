@@ -3,7 +3,7 @@
 		template = {
 			index: 	'<!-- data-repeat -->'+
 					'<li class="item x.class" data-repeat="x in list" data-id="x.id">'+
-						'<a class="wrap" href="detail.html#id=x.id">'+
+						'<a class="wrap" href="detail.html?id=x.id">'+
 							'<img src="x.image" class="thumb">'+
 							'<p class="title">x.title</p>'+
 							'<p class="hot">热度: x.heat</p>'+
@@ -41,7 +41,7 @@
 						'</div>'+
 					'</div>'+
 
-					'<div class="btn-wrap"><a href="../../pay/write.html#actid={#id#}&type=youth" class="btn"></a></div>'
+					'<div class="btn-wrap"><a href="../../pay/write.html?id={#id#}&type=youth" class="btn"></a></div>'
 		}
 
 	// 活动首页

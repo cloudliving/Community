@@ -40,7 +40,7 @@
 				//请求数据成功
 				if(data['Code']==0){
 					var s = '<!-- data-repeat -->'+
-							'<a href="../select/community.html#id=x.id&str='+para['str']+'>x.title" class="item" data-repeat="x in result">x.title<span class="icon-arrow-down-1"></span></a>'+
+							'<a href="../select/community.html?id=x.id&str='+para['str']+'>x.title" class="item" data-repeat="x in result">x.title<span class="icon-arrow-down-1"></span></a>'+
 							'<!-- end data-repeat -->'
 					var temp = s.format(data);
 					$('.content').append(temp);

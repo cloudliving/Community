@@ -4,7 +4,7 @@ $(function(){
 		str = '',
 		template = {
 			list: 	'<!-- data-repeat -->'+
-					'<a class="mpmt-item" href="detail.html#id=x.id" data-repeat="x in list">'+
+					'<a class="mpmt-item" href="detail.html?id=x.id" data-repeat="x in list">'+
 		            	'<div class="main">'+
 		            	    '<h4 class="name">x.title</h4>'+
 		            	    '<p><i class="icon-position"></i>x.address</p>'+
@@ -35,7 +35,7 @@ $(function(){
 				                '<li class="item clearfix"><span class="left">联系电话</span><span class="right">{#phone#}</span></li>'+
 				            '</ul>'+
 				        '</div>'+
-				        '<div class="btn-wrap"><a href="../../pay/write.html#id={#id#}&type=mpmt" class="btn {#btnclass#}">{#btntext#}</a></div>'
+				        '<div class="btn-wrap"><a href="../../pay/write.html?id={#id#}&type=mpmt" class="btn {#btnclass#}">{#btntext#}</a></div>'
 
 		}
 

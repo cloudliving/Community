@@ -4,7 +4,7 @@ $(function(){
 		template = {
 			list: 	'<!-- data-repeat -->'+
 					'<li class="item" data-repeat="x in list">'+
-						'<a href="detail.html#id=x.id">'+
+						'<a href="detail.html?id=x.id">'+
 							'<div class="top">'+
 								'<img class="thumb" src="x.image" alt="">'+
 								'<div class="wrap">'+
