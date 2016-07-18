@@ -35,23 +35,22 @@
 	<script>
 		(function(){
 			$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=act&action=my_act",{uid: uid},function(data){
-				console.log(data);
-				if(data['Code']==0){
-					var s = '<!-- data-repeat -->'+
-							'<a href="../../html/myself/act_info.html?id=x.id" class="item" data-repeat="x in myActList">'+
-								'<p class="date">x.ctime</p>'+
-								'<p class="tit">x.title</p>'+
-								'<p class="number">编号 x.id</p>'+
-								'<p class="time">项目时间 x.setime</p>'+
-							'</a>'+
-							'<!-- end data-repeat -->';
-					s = s.format(data.result);
-					$('.contain').append(s);
-					utils.loading();
-				}else{
-					utils.loading();
-					$.tips({content: data['errorMessage']});
-				}
+				if (data.Code != 0) {$.tips({content: data.errorMessage + '请刷新重试'}); return}
+
+				var s = '<!-- data-repeat -->'+
+						'<a href="act_info.html?id=x.id" class="item" data-repeat="x in myActList">'+
+							'<p class="date">x.ctime</p>'+
+							'<p class="tit">x.title</p>'+
+							'<p class="number">编号 x.id</p>'+
+							'<p class="time">项目时间 x.setime</p>'+
+						'</a>'+
+						'<!-- end data-repeat -->';
+
+				s = data.result.myActList ? s.format(data.result) : '<p class="none">暂无数据</p>'
+
+				$('.contain').append(s);
+
+				utils.loading();
 			},"json");
 		})();
 	</script>

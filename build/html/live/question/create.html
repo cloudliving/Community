@@ -7,9 +7,9 @@
 	<meta name="format-detection" content="telephone=no">
 	<title>新建问题</title>
 
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/flexible.js?v=1468573412659"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/flexible.js?v=1468834797485"></script>
 	<link rel="stylesheet" href="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/frozen.min.css">
-	<link rel="stylesheet" href="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/css/community.min.css?v=1468573412659">
+	<link rel="stylesheet" href="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/css/community.min.css?v=1468834797485">
 
 	<style>
 		body {line-height: 1.5;}
@@ -102,15 +102,18 @@
 
 	
 	<!-- Import JS -->
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/zepto.min.js?v=1468573412659"></script>
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/frozen.min.js?v=1468573412659"></script>
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/extends.js?v=1468573412659"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/zepto.min.js?v=1468834797485"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/frozen.min.js?v=1468834797485"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/extends.js?v=1468834797485"></script>
 	<script>
 		$(function(){
 			var typeBtn = $('.type'),
 				type = $('.question-type'),
 				typeText = $('.type-text'),
 				typeid = 0,    // 默认类型id，
+				anonymous = $('.anonymous'),
+				anonymousIcon = anonymous.children('i'), // 匿名图标
+				anonymousId = 1, // 匿名id, 1为匿名, 0为不匿名, 默认匿名
 
 				form = $('form'),
 				title = $('#title'),
@@ -129,7 +132,17 @@
 			})
 			typeBtn.on('tap', function(){
 				type.fadeIn()
-				console.log(type)
+			})
+
+			// 匿名点击逻辑
+			anonymous.on('tap', function(){
+				if (anonymousIcon.hasClass('choose')) {
+					anonymousIcon.removeClass('choose')
+					anonymousId = 0
+				} else {
+					anonymousIcon.addClass('choose')
+					anonymousId = 1
+				}
 			})
 
 			// 表单验证

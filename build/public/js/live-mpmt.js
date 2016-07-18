@@ -35,7 +35,7 @@ $(function(){
 				                '<li class="item clearfix"><span class="left">联系电话</span><span class="right">{#phone#}</span></li>'+
 				            '</ul>'+
 				        '</div>'+
-				        '<div class="btn-wrap"><a href="../../pay/write.html?id={#id#}&type=mpmt" class="btn {#btnclass#}">{#btntext#}</a></div>'
+				        '<div class="btn-wrap"><a href="http://weixin.cloudliving.net/index.php?m=CAPI&c=Index&a=write&join_id={#join_id#}" class="btn {#btnclass#}">{#btntext#}</a></div>'
 
 		}
 
@@ -52,7 +52,7 @@ $(function(){
 				text
 			if (data.Code != '0') { $.tips({content:data.errorMessage + '请刷新重试'}); return}
 
-			if (data.result.massPTList.length > 0) {
+			if (data.result.massPTList) {
 				data.result.massPTList.forEach(function(e, index){
 					switch (e.status) {
 						case '1':
@@ -71,7 +71,7 @@ $(function(){
 				str = template.list.format({list: data.result.massPTList})
 
 			} else {
-				str = '<p>暂无数据</p>'   
+				str = '<p class="none">暂无数据</p>'   
 			}
 
 			$('.mpmts').append(str)

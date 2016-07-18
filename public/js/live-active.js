@@ -13,7 +13,7 @@
 
 			detail: '<div class="act-detail">'+
 						'<div class="hd">'+
-							'<img src="../../../public/images/demo-2.png" alt="" class="thumb">'+
+							'<img src="{#image#}" alt="" class="thumb">'+
 							'<p class="title">{#title#}</p>'+
 							'<p class="clearfix"><span class="hot">热度:{#heat#}</span><span class="num">编号:{#num#}</span></p>'+
 						'</div>'+
@@ -41,7 +41,7 @@
 						'</div>'+
 					'</div>'+
 
-					'<div class="btn-wrap"><a href="../../pay/write.html?id={#id#}&type=active" class="btn"></a></div>'
+					'<div class="btn-wrap"><a href="http://weixin.cloudliving.net/index.php?m=CAPI&c=Index&a=write&join_id={#join_id#}" class="btn"></a></div>'
 		}
 
 	// 活动首页
@@ -57,25 +57,26 @@
 		var range = $('.range a')
 		range.on('tap', function(e){
 			e.preventDefault()
-			console.log(123)
 
 			var target = $(e.target),
 				url = target.hasClass('position') ? 
 					'http://vht.cloudliving.net/index.php?m=Community&c=Index&a=act&action=act&type_id=2' : 
 					'http://vht.cloudliving.net/index.php?m=Community&c=Index&a=act&action=act_all&type_id=2'
 
-			range.removeClass('current')
-			target.addClass('current')
+
 
 			$.get(url, {uid:uid},function(data){
+				range.removeClass('current')
+				target.addClass('current')
+
 				var data = JSON.parse(data), 
 					str, 
 					ary = []
 				if (data.Code != '0') { $.tips({content:data.errorMessage + '请刷新重试'}); return}
 
 				// 处理数据
-				if (data.result.actList.length == 0) {
-					temp = '<p>暂无活动</p>'
+				if (!data.result.actList) {
+					temp = '<p class="none">暂无数据</p>'
 				} else {
 					data.result.actList.forEach(function(e){
 						switch (e.status_priority) {
@@ -97,6 +98,7 @@
 				// 渲染dom
 				$('.active-list').empty()
 				$('.active-list').append(temp)
+				temp = null
 			})
 		})
 
@@ -122,6 +124,8 @@
 			obj.num = data.result.num
 			obj.intro = data.result.brief
 			obj.id = data.result.id
+			obj.join_id = data.result.join_id
+			obj.image = data.result.join_id
 			obj.list = []
 			obj.list.push({key: '项目时间', value: data.result.setime})
 			obj.list.push({key: '费用(元)', value: data.result.fee, class: 'highlight'})
@@ -137,16 +141,25 @@
 			$('#wrapper').append(temp)
 
 			// 初始化选项卡
-			new fz.Scroll('.ui-tab', {
-			        role: 'tab',
-			        autoplay: false,
-			        interval: 3000
-			    });
+			;(function(){
+				var result = new fz.Scroll('.ui-tab', {
+				        role: 'tab',
+				        autoplay: false,
+				        interval: 3000
+				    });
+
+				var that = arguments.callee
+				if (!result.itemWidth) {
+					setTimeout(function(){
+						that()
+					}, 500)
+				}
+			})()
 
 			// 页面逻辑处理
 			var btn = $('.btn-wrap .btn')
 			if (type == 1) {
-				if (data.result.join_status == 3) {
+				if (data.result.join_status == 2) {
 					btn.text('已报名')
 					btn.addClass('joined')
 				} else {

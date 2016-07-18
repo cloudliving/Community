@@ -113,6 +113,9 @@
 				type = $('.question-type'),
 				typeText = $('.type-text'),
 				typeid = 0,    // 默认类型id，
+				anonymous = $('.anonymous'),
+				anonymousIcon = anonymous.children('i'), // 匿名图标
+				anonymousId = 1, // 匿名id, 1为匿名, 0为不匿名, 默认匿名
 
 				form = $('form'),
 				title = $('#title'),
@@ -131,7 +134,17 @@
 			})
 			typeBtn.on('tap', function(){
 				type.fadeIn()
-				console.log(type)
+			})
+
+			// 匿名点击逻辑
+			anonymous.on('tap', function(){
+				if (anonymousIcon.hasClass('choose')) {
+					anonymousIcon.removeClass('choose')
+					anonymousId = 0
+				} else {
+					anonymousIcon.addClass('choose')
+					anonymousId = 1
+				}
 			})
 
 			// 表单验证

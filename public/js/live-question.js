@@ -52,7 +52,7 @@ $(function(){
 			var data = JSON.parse(res), str
 			if (data.Code != 0) { $.tips({content:data.errorMessage + '请刷新重试'}); return}
 
-			str = data.result.questionList.length == 0 ? '<p class="none">暂无数据</p>' : template.list.format({list: data.result.questionList})
+			str = !data.result.questionList ? '<p class="none">暂无数据</p>' : template.list.format({list: data.result.questionList})
 			$('.question-list').append(str)
 			utils.loading()
 		})

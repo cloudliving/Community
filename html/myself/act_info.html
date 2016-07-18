@@ -48,7 +48,7 @@
 				</div>
 			</div>
 			<div class="sub-btn">
-				<a href="../../html/myself/mod_info.html" class="modify">更改预留消息</a>
+				<a href="mod_info.html" class="modify">更改预留消息</a>
 			</div>
 		</div>
 	</div>
@@ -73,7 +73,7 @@
 					$('.act-info').append(s);
 					$('#name').val(data['result']['linkman']);
 					$('#phone').val(data['result']['phone']);
-					$('.modify').attr('href',"../../html/myself/mod_info.html#id="+data['result']['id']);
+					$('.modify').attr('href',"mod_info.html#id="+data['result']['id']);
 					utils.loading();
 				}else{
 					utils.loading();

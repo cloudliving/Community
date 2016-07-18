@@ -2,7 +2,7 @@ body.sel-index {
 	background-color: #fef5d2;
 }
 .sel-index .head {
-	padding: 0.8rem 0.4rem;
+	padding: 0.4rem;
 	text-align: center;
 }
 .sel-index .head img {
@@ -35,15 +35,16 @@ body.sel-index {
 .sel-index .con p {
 	font-size: 14px;
 	line-height: 1.8em;
+	text-align: justify;
 }
 .sel-index .con p:nth-child(1) {
 	margin-top: 0.1rem;
 }
 .sel-index .con p:not(:first-child) {
-	margin-top: 0.62rem;
+	margin-top: 0.3rem;
 }
 .sel-index .select {
-	margin-top: 1rem;
+	/*margin-top: 1rem;*/
 	padding: 0.4rem 0.48rem;
 }
 .sel-index .select a {

@@ -8,9 +8,9 @@
 	<meta name="format-detection" content="telphone=no, email=no"/>
 	<title>活动报名信息</title>
 	
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/flexible.js?v=1468573412659"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/flexible.js?v=1468834797485"></script>
 	<link rel="stylesheet" href="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/frozen.min.css">
-	<link rel="stylesheet" href="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/css/community.min.css?v=1468573412659">
+	<link rel="stylesheet" href="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/css/community.min.css?v=1468834797485">
 
 </head>
 <body class="my-actinfo">
@@ -46,14 +46,14 @@
 				</div>
 			</div>
 			<div class="sub-btn">
-				<a href="../../html/myself/mod_info.html" class="modify">更改预留消息</a>
+				<a href="mod_info.html" class="modify">更改预留消息</a>
 			</div>
 		</div>
 	</div>
 
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/zepto.min.js?v=1468573412659"></script>
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/frozen.min.js?v=1468573412659"></script>
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/extends.js?v=1468573412659"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/zepto.min.js?v=1468834797485"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/frozen.min.js?v=1468834797485"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/extends.js?v=1468834797485"></script>
 	<script>
 		(function(){
 			var para = utils.parseHash();
@@ -71,7 +71,7 @@
 					$('.act-info').append(s);
 					$('#name').val(data['result']['linkman']);
 					$('#phone').val(data['result']['phone']);
-					$('.modify').attr('href',"../../html/myself/mod_info.html#id="+data['result']['id']);
+					$('.modify').attr('href',"mod_info.html#id="+data['result']['id']);
 					utils.loading();
 				}else{
 					utils.loading();

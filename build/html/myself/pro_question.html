@@ -8,9 +8,9 @@
 	<meta name="format-detection" content="telphone=no, email=no"/>
 	<title>问题汇集</title>
 	
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/flexible.js?v=1468573412659"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/flexible.js?v=1468834797485"></script>
 	<link rel="stylesheet" href="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/frozen.min.css">
-	<link rel="stylesheet" href="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/css/community.min.css?v=1468573412659">
+	<link rel="stylesheet" href="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/css/community.min.css?v=1468834797485">
 
 </head>
 <body>
@@ -22,9 +22,9 @@
 
 
 
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/zepto.min.js?v=1468573412659"></script>
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/frozen.min.js?v=1468573412659"></script>
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/extends.js?v=1468573412659"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/zepto.min.js?v=1468834797485"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/frozen.min.js?v=1468834797485"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/extends.js?v=1468834797485"></script>
 	<script>
 		var template = '<!-- data-repeat -->'+
 						'<li class="item" data-repeat="x in list">'+
@@ -46,7 +46,7 @@
 			var data = JSON.parse(res), str
 			if (data.Code != 0) { $.tips({content:data.errorMessage + '请刷新重试'}); return}
 
-			str = data.result.myQuestionList.length == 0 ? '<p class="none">暂无数据</p>' : template.format({list: data.result.myQuestionList})
+			str = !data.result.myQuestionList ? '<p class="none">暂无数据</p>' : template.format({list: data.result.myQuestionList})
 			$('.question-list').append(str)
 			utils.loading()
 		})

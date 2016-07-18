@@ -52,7 +52,7 @@
                     text
                 if (data.Code != '0') { $.tips({content:data.errorMessage + '请刷新重试'}); return}
 
-                if (data.result.myMassPTList.length > 0) {
+                if (data.result.myMassPTList) {
                     data.result.myMassPTList.forEach(function(e, index){
                         switch (e.status) {
                             case '1':
@@ -71,7 +71,7 @@
                     str = template.format({list: data.result.myMassPTList})
 
                 } else {
-                    str = '<p>暂无数据</p>'   
+                    str = '<p class="none">暂无数据</p>'   
                 }
 
                 $('.mpmts').append(str)

@@ -109,6 +109,8 @@ var uid = (utils.parseHash() && utils.parseHash().uid) || 108391
 			}
 		}).addClass('finished')
 	}
+
+	add()
 })()
 
 

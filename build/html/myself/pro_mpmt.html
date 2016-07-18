@@ -8,9 +8,9 @@
 	<meta name="format-detection" content="telphone=no, email=no"/>
 	<title>我的群防群治</title>
 	
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/flexible.js?v=1468573412659"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/flexible.js?v=1468834797485"></script>
 	<link rel="stylesheet" href="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/frozen.min.css">
-	<link rel="stylesheet" href="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/css/community.min.css?v=1468573412659">
+	<link rel="stylesheet" href="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/css/community.min.css?v=1468834797485">
 
 </head>
 <body>
@@ -22,9 +22,9 @@
 
 
 
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/zepto.min.js?v=1468573412659"></script>
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/frozen.min.js?v=1468573412659"></script>
-    <script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/extends.js?v=1468573412659"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/zepto.min.js?v=1468834797485"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/frozen.min.js?v=1468834797485"></script>
+    <script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/extends.js?v=1468834797485"></script>
     <script>
         $(function(){
             var template =  '<!-- data-repeat -->'+
@@ -50,7 +50,7 @@
                     text
                 if (data.Code != '0') { $.tips({content:data.errorMessage + '请刷新重试'}); return}
 
-                if (data.result.myMassPTList.length > 0) {
+                if (data.result.myMassPTList) {
                     data.result.myMassPTList.forEach(function(e, index){
                         switch (e.status) {
                             case '1':
@@ -69,7 +69,7 @@
                     str = template.format({list: data.result.myMassPTList})
 
                 } else {
-                    str = '<p>暂无数据</p>'   
+                    str = '<p class="none">暂无数据</p>'   
                 }
 
                 $('.mpmts').append(str)

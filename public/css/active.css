@@ -44,7 +44,7 @@
 .page-active .info-list .right {color: #949494;text-align: right; -webkit-flex: 1; flex: 1;}
 .page-active .info-list .highlight {color: #fc7b5c;}
 
-.page-active .text-wrap {padding: .25rem; color: #3b3a40; background: #fff; font-size: 14px; line-height: 1.8; text-align: justify;}
+.page-active .text-wrap {padding: .25rem; color: #3b3a40; background: #fff; font-size: 14px; line-height: 1.8; text-align: justify; min-height: 4rem}
 .page-active .text-wrap p {margin-bottom: 2rem;}
 .page-active .text-wrap p:last-child {margin-bottom: 0;}
 
