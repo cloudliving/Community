@@ -8,9 +8,9 @@
 	<meta name="format-detection" content="telphone=no, email=no"/>
 	<title>更改预留信息</title>
 	
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/flexible.js?v=1468834797485"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/flexible.js?v=1469006388807"></script>
 	<link rel="stylesheet" href="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/frozen.min.css">
-	<link rel="stylesheet" href="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/css/community.min.css?v=1468834797485">
+	<link rel="stylesheet" href="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/css/community.min.css?v=1469006388807">
 
 </head>
 <body class="my-actinfo">
@@ -55,26 +55,26 @@
 						<label>验证码</label>
 						<p class="key code">
 							<input class="text-left" type="text" id="ver_code" placeholder="必填">
-							<button id="getcode">获取验证码</button>
+							<button id="getcode" type="button">获取验证码</button>
 						</p>
 					</div>
 				</div>
 			</div>
 			<div class="sub-btn">
-				<a href="javascript:void(0);">保存</a>
+				<a href="javascript:void(0);" class="finished">保存</a>
 			</div>
 			</form>
 		</div>
 	</div>
 
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/zepto.min.js?v=1468834797485"></script>
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/frozen.min.js?v=1468834797485"></script>
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/extends.js?v=1468834797485"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/zepto.min.js?v=1469006388807"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/frozen.min.js?v=1469006388807"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/extends.js?v=1469006388807"></script>
 	<script>
 		(function(){
 			var para = utils.parseHash();
 			var JOIN_ID = "";
-			$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=act&action=my_act_detail",{id: para['id'],uid: uid},function(data){
+			$.get("http://weixin.cloudliving.net/community_service.php?c=Index&a=act&action=my_act_detail",{id: para['id'],uid: uid},function(data){
 				console.log(data);
 				if(data['Code']==0){
 					$('#name').val(data['result']['linkman']);
@@ -94,7 +94,7 @@
 				var newphone = $('#newphone').val();
 				var reg = /^1\d{10}$/; 
 				if(newphone!=""&&reg.test(newphone)){
-					$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=act&action=send_verify_code",{phone: newphone,uid: uid},function(data){
+					$.get("http://weixin.cloudliving.net/community_service.php?c=Index&a=act&action=send_verify_code",{phone: newphone,uid: uid},function(data){
 						console.log(data);
 						if(data['Code']==0){
 							time(This);
@@ -114,20 +114,20 @@
 				var vcode = $('#ver_code').val();
 				if(name!=""){
 					if(NewPhone!=""&&vcode==VerCode){
-						$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=act&action=edit_my_act_detail",{join_id:JOIN_ID,linkman:name,phone:NewPhone,uid: uid},function(data){
-							console.log(data);
+						$.get("http://weixin.cloudliving.net/community_service.php?c=Index&a=act&action=edit_my_act_detail",{join_id:JOIN_ID,linkman:name,phone:NewPhone,uid: uid},function(data){
 							if(data['Code']==0){
-								alert(data['result']);
-								location.reload();
+								$.tips({content: '修改成功'})
+								$('#name').val(name);
+								$('#phone').val(NewPhone);
 							}else{
 								$.tips({content:data['errorMessage']});
 							}
 						},"json");
 					}else if(NewPhone==""){
-						$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=act&action=edit_my_act_detail",{join_id:JOIN_ID,linkman:name,uid: uid},function(data){
+						$.get("http://weixin.cloudliving.net/community_service.php?c=Index&a=act&action=edit_my_act_detail",{join_id:JOIN_ID,linkman:name,uid: uid},function(data){
 							if(data['Code']==0){
-								alert(data['result']);
-								location.reload();
+								$.tips({content: '修改成功'})
+								$('#name').val(name);
 							}else{
 								$.tips({content:data['errorMessage']});
 							}

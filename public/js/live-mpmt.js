@@ -75,6 +75,56 @@ $(function(){
 			}
 
 			$('.mpmts').append(str)
+
+			// 绑定搜索逻辑
+			;(function(){
+				var form = $('form'),
+					input = $('#search'),
+					search = $('.search-btn'),
+					back = $('.back'),
+					wrap = $('.mpmts'),
+					cache = wrap.html(),
+					str
+
+				form.on('submit', function(e){
+					e.preventDefault()
+
+					$.get('http://vht.cloudliving.net/index.php?m=Community&c=Index&a=MassPT&action=mass_p_t', {title: input.val(), uid: uid}, function(data){
+						if (data.Code != 0) {$.tips({content: data.errorMessage}); return}
+						if (!data.result.massPTList) {$.tips({content: '暂无搜索结果'}); return}						
+
+						back.fadeIn()
+						cache = wrap.html()
+
+						data.result.massPTList.forEach(function(e, index){
+							switch (e.status) {
+								case '1':
+									text = '报名中'
+									break; 
+								case '2':
+									text = '进行中'
+									break;
+								case '3':
+									text = '已截止'
+									break;		
+							}
+							data.result.massPTList[index].text = text
+						})
+
+						str = template.list.format({list: data.result.massPTList})
+
+						wrap.html(str)
+					}, 'json')
+				})
+
+				back.on('tap', function(){
+					$(this).hide()
+					wrap.html(cache)
+					input.val('')
+				})
+			})()
+
+
 			utils.loading()
 		})
 	}

@@ -73,7 +73,7 @@
 					$('.act-info').append(s);
 					$('#name').val(data['result']['linkman']);
 					$('#phone').val(data['result']['phone']);
-					$('.modify').attr('href',"mod_info.html#id="+data['result']['id']);
+					$('.modify').attr('href',"mod_info.html?id="+data['result']['id']);
 					utils.loading();
 				}else{
 					utils.loading();

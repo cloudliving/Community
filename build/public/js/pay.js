@@ -44,9 +44,9 @@
 					'</div>'
 		},
 		introUrl = {
-			active: 'http://vht.cloudliving.net/index.php?m=Community&c=Index&a=act&action=act_detail&id=',
-			youth: 'http://vht.cloudliving.net/index.php?m=Community&c=Index&a=act&action=act_detail&id=',
-			mpmt: 'http://vht.cloudliving.net/index.php?m=Community&c=Index&a=MassPT&action=mass_p_t_detail&id='
+			active: 'http://weixin.cloudliving.net/community_service.php?c=Index&a=act&action=act_detail&id=',
+			youth: 'http://weixin.cloudliving.net/community_service.php?c=Index&a=act&action=act_detail&id=',
+			mpmt: 'http://weixin.cloudliving.net/community_service.php?c=Index&a=MassPT&action=mass_p_t_detail&id='
 		}
 
 
@@ -81,7 +81,7 @@
 				}
 
 				// 加入活动
-				$.get('http://vht.cloudliving.net/index.php?m=Community&c=Index&a=act&action=join_act&id='+hash.id+'&linkman='+name+'&phone='+phone, {uid:uid},function(data){
+				$.get('http://weixin.cloudliving.net/community_service.php?c=Index&a=act&action=join_act&id='+hash.id+'&linkman='+name+'&phone='+phone, {uid:uid},function(data){
 					var data = JSON.parse(data)
 					if (data.Code != '0') { $.tips({content:data.errorMessage + '请重试'}); return}
 
@@ -110,7 +110,7 @@
 
 	// 确认页面
 	// if (href.search('pay.html') > 0) {
-	// 	$.get('http://vht.cloudliving.net/index.php?m=Community&c=Index&a=act&action=act_detail&id='+hash.id, {uid:uid},function(data){
+	// 	$.get('http://weixin.cloudliving.net/community_service.php?c=Index&a=act&action=act_detail&id='+hash.id, {uid:uid},function(data){
 	// 		console.log(data)
 	// 		var data = JSON.parse(data),
 	// 			str = ""

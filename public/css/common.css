@@ -22,11 +22,11 @@ input {-webkit-border-radius: 0; border-radius: 0;-webkit-appearance: none; }
 /* icon */
 @font-face {
     font-family: 'icomoon';
-    src:    url('../../public/fonts/icomoon.eot?mobrhs');
-    src:    url('../../public/fonts/icomoon.eot?mobrhs#iefix') format('embedded-opentype'),
-        url('../../public/fonts/icomoon.ttf?mobrhs') format('truetype'),
-        url('../../public/fonts/icomoon.woff?mobrhs') format('woff'),
-        url('../../public/fonts/icomoon.svg?mobrhs#icomoon') format('svg');
+    src:    url('../../public/fonts/icomoon.eot?0719-1');
+    src:    url('../../public/fonts/icomoon.eot?0719-1#iefix') format('embedded-opentype'),
+        url('../../public/fonts/icomoon.ttf?0719-1') format('truetype'),
+        url('../../public/fonts/icomoon.woff?0719-1') format('woff'),
+        url('../../public/fonts/icomoon.svg?0719-1#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -46,6 +46,8 @@ input {-webkit-border-radius: 0; border-radius: 0;-webkit-appearance: none; }
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-house-2:before {content: '\e910';}
+.icon-menu:before {content: '\e90e';}
 .icon-arrow-down-1:before {content: '\e909';}
 .icon-heart:before {content: '\e908';}
 .icon-cap:before {content: '\e900';}
@@ -62,8 +64,9 @@ input {-webkit-border-radius: 0; border-radius: 0;-webkit-appearance: none; }
 .icon-user-1:before {content: '\e90d';}
 .icon-ball:before {content: '\e90f';}
 
+
 /* 底部固定导航 */
-.g-bottom-nav {position: fixed; bottom: 0; left: 0; width: 100%; padding: .15rem 0; border-top: 1px solid #cdcdcd;background-color: rgba(255, 255, 255, .98); }
+.g-bottom-nav {position: fixed; z-index: 2; bottom: 0; left: 0; width: 100%; padding: .15rem 0; border-top: 1px solid #cdcdcd;background-color: rgba(255, 255, 255, .98); }
 .g-bottom-nav ul {position: relative;}
 .g-bottom-nav ul li {display: block; width: 33.3%; text-align: center;}
 .g-bottom-nav ul li:nth-child(1) {position: absolute; top: 0; left: 0;}
@@ -72,4 +75,4 @@ input {-webkit-border-radius: 0; border-radius: 0;-webkit-appearance: none; }
 .g-bottom-nav ul li a {color: #4d4d4d;}
 .g-bottom-nav ul li a span {font-size: .44rem;}
 .g-bottom-nav ul li a p {margin-top: .08rem; font-size: 12px;}
-.g-bottom-nav ul li.current a {color: #10afff;}
+.g-bottom-nav ul li.current a {color: #10afff; pointer-events: none;}

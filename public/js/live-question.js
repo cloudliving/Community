@@ -54,6 +54,40 @@ $(function(){
 
 			str = !data.result.questionList ? '<p class="none">暂无数据</p>' : template.list.format({list: data.result.questionList})
 			$('.question-list').append(str)
+
+			// 绑定搜索逻辑
+			;(function(){
+				var form = $('form'),
+					input = $('#search'),
+					search = $('.search-btn'),
+					back = $('.back'),
+					wrap = $('.question-list'),
+					cache = wrap.html(),
+					str
+
+				form.on('submit', function(e){
+					e.preventDefault()
+
+					$.get('http://vht.cloudliving.net/index.php?m=Community&c=Index&a=question&action=question', {title: input.val(), uid: uid}, function(data){
+						if (data.Code != 0) {$.tips({content: data.errorMessage}); return}
+						if (!data.result.massPTList) {$.tips({content: '暂无搜索结果'}); return}						
+
+						back.fadeIn()
+						cache = wrap.html()
+
+						str = template.list.format({list: data.result.questionList})
+						wrap.html(str)
+						
+					}, 'json')
+				})
+
+				back.on('tap', function(){
+					$(this).hide()
+					wrap.html(cache)
+					input.val('')
+				})
+			})()
+
 			utils.loading()
 		})
 	}

@@ -8,9 +8,9 @@
 	<meta name="format-detection" content="telphone=no, email=no"/>
 	<title>我</title>
 	
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/flexible.js?v=1468834797485"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/flexible.js?v=1469006388807"></script>
 	<link rel="stylesheet" href="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/frozen.min.css">
-	<link rel="stylesheet" href="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/css/community.min.css?v=1468834797485">
+	<link rel="stylesheet" href="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/css/community.min.css?v=1469006388807">
 
 </head>
 <body class="my-index">
@@ -68,9 +68,9 @@
 					</a>
 				</li>
 				<li>
-					<a href="../social/index.html">
-						<span class="icon-house-1"></span>
-						<p>社圈</p>
+					<a href="../govern/index.html">
+						<span class="icon-menu"></span>
+						<p>综合治理</p>
 					</a>
 				</li>
 				<li class="current">
@@ -83,13 +83,13 @@
 		</div>
 	</div>
 
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/zepto.min.js?v=1468834797485"></script>
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/frozen.min.js?v=1468834797485"></script>
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/extends.js?v=1468834797485"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/zepto.min.js?v=1469006388807"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/frozen.min.js?v=1469006388807"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/extends.js?v=1469006388807"></script>
 	<script>
 		(function(){
 			//获得社区
-			$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=department&action=my_department", {uid:uid}, function(data){
+			$.get("http://weixin.cloudliving.net/community_service.php?c=Index&a=department&action=my_department", {uid:uid}, function(data){
 				console.log(data);
 				if(data['Code']==0){
 					$('.community').text(data['result'][0]['title']);
@@ -100,7 +100,7 @@
 			},"json");
 
 			//获得头像呢称
-			$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=user&action=my_info", {uid:uid}, function(data){
+			$.get("http://weixin.cloudliving.net/community_service.php?c=Index&a=user&action=my_info", {uid:uid}, function(data){
 				console.log(data);
 				if(data['Code']==0){
 					$('.avatar img').attr('src',data['result']['avatar']);

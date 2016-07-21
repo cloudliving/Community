@@ -19,6 +19,8 @@ gulp.task("concatCss", function() {
 gulp.task("moveJs", function() {
 	return gulp.src(["./public/js/*.js"])
                 .pipe(replace(/(\.\.\/){0,4}public/g,'http://cloudliving-img.b0.upaiyun.com/static/Home/Community'))
+                // 更换正式接口
+                // .pipe(replace('vht.cloudliving.net/index.php?m=Community&c=Index', 'weixin.cloudliving.net/community_service.php?c=Index'))
 	            .pipe(gulp.dest("./build/public/js"));
 });
 
@@ -45,6 +47,8 @@ gulp.task('moveimg', function() {
 gulp.task('replace', function() {
     gulp.src(['./html/*.html', './html/**/*.html', './html/**/**/*.html'])
         .pipe(replace(/(\.\.\/){0,4}public/g, 'http://cloudliving-img.b0.upaiyun.com/static/Home/Community'))
+        // 更换正式接口
+        // .pipe(replace('vht.cloudliving.net/index.php?m=Community&c=Index', 'weixin.cloudliving.net/community_service.php?c=Index'))
         .pipe(replace(/src=".+\.js/g, function(a){return a+'?v='+time}))
         .pipe(build({
             'css':'http://cloudliving-img.b0.upaiyun.com/static/Home/Community/css/community.min.css?v='+time
@@ -65,6 +69,17 @@ gulp.task('uploadtest', function(){
         }))
 })
 
+// 上传到正式服务器
+gulp.task('upload', function(){
+    gulp.src(['build/html/*.html', 'build/html/**/*.html'])
+        .pipe(sftp({
+            host: '114.55.43.3',
+            port: 22,
+            user: 'root',
+            pass: 'Cloud2016',
+            remotePath: '/usr/local/nginx/html/source/community'
+        }))
+})
 
 
 

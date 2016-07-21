@@ -42,24 +42,58 @@ $(function(){
 
 	if (href.search('index.html') >= 0) {
 		// 定位社区
-		$.get('http://vht.cloudliving.net/index.php?m=Community&c=Index&a=department&action=my_department', {uid:uid},function(data){
+		$.get('http://weixin.cloudliving.net/community_service.php?c=Index&a=department&action=my_department', {uid:uid},function(data){
 			var data = JSON.parse(data)
 			if (data.Code != '0') { $.tips({content:data.errorMessage + '请刷新重试'}); return}
 			$('.cummu').text(data.result[0].title)
 		})
 
-		$.get('http://vht.cloudliving.net/index.php?m=Community&c=Index&a=question&action=question', {uid: uid}, function(res){
+		$.get('http://weixin.cloudliving.net/community_service.php?c=Index&a=question&action=question', {uid: uid}, function(res){
 			var data = JSON.parse(res), str
 			if (data.Code != 0) { $.tips({content:data.errorMessage + '请刷新重试'}); return}
 
 			str = !data.result.questionList ? '<p class="none">暂无数据</p>' : template.list.format({list: data.result.questionList})
 			$('.question-list').append(str)
+
+			// 绑定搜索逻辑
+			;(function(){
+				var form = $('form'),
+					input = $('#search'),
+					search = $('.search-btn'),
+					back = $('.back'),
+					wrap = $('.question-list'),
+					cache = wrap.html(),
+					str
+
+				form.on('submit', function(e){
+					e.preventDefault()
+
+					$.get('http://weixin.cloudliving.net/community_service.php?c=Index&a=question&action=question', {title: input.val(), uid: uid}, function(data){
+						if (data.Code != 0) {$.tips({content: data.errorMessage}); return}
+						if (!data.result.massPTList) {$.tips({content: '暂无搜索结果'}); return}						
+
+						back.fadeIn()
+						cache = wrap.html()
+
+						str = template.list.format({list: data.result.questionList})
+						wrap.html(str)
+						
+					}, 'json')
+				})
+
+				back.on('tap', function(){
+					$(this).hide()
+					wrap.html(cache)
+					input.val('')
+				})
+			})()
+
 			utils.loading()
 		})
 	}
 
 	if (href.search('detail.html') >= 0) {
-		$.get('http://vht.cloudliving.net/index.php?m=Community&c=Index&a=question&action=question_detail&id='+hash.id, {uid: uid}, function(res){
+		$.get('http://weixin.cloudliving.net/community_service.php?c=Index&a=question&action=question_detail&id='+hash.id, {uid: uid}, function(res){
 			var data = JSON.parse(res)
 			if (data.Code != 0) { $.tips({content:data.errorMessage + '请刷新重试'}); return}
 

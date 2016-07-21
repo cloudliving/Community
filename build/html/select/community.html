@@ -8,9 +8,9 @@
 	<meta name="format-detection" content="telphone=no, email=no"/>
 	<title>选择社区</title>
 	
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/flexible.js?v=1468834797485"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/flexible.js?v=1469006388807"></script>
 	<link rel="stylesheet" href="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/frozen.min.css">
-	<link rel="stylesheet" href="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/css/community.min.css?v=1468834797485">
+	<link rel="stylesheet" href="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/css/community.min.css?v=1469006388807">
 
 </head>
 <body class="sel-area">
@@ -25,14 +25,14 @@
 		</div>
 	</div>
 
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/zepto.min.js?v=1468834797485"></script>
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/frozen.min.js?v=1468834797485"></script>
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/extends.js?v=1468834797485"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/zepto.min.js?v=1469006388807"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/frozen.min.js?v=1469006388807"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/extends.js?v=1469006388807"></script>
 	<script>
 		(function(){
 			var para = utils.parseHash();
 			$('.head').text("武汉>"+decodeURIComponent(para['str']));
-			$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=department&action=get_department",{pid:para['id'], uid:uid},function(data){
+			$.get("http://weixin.cloudliving.net/community_service.php?c=Index&a=department&action=get_department",{pid:para['id'], uid:uid},function(data){
 				console.log(data);
 				//请求数据成功
 				if(data['Code']==0){
@@ -51,7 +51,7 @@
 			//加入社区
 			$(document).on('click','.item',function(){
 				var did = $(this).data('did');
-				$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=department&action=join_department&did=DID",{did: did,uid: uid},function(data){
+				$.get("http://weixin.cloudliving.net/community_service.php?c=Index&a=department&action=join_department&did=DID",{did: did,uid: uid},function(data){
 					console.log(data);
 					if(data['Code']==0){
 						location.href = "../index.html?uid="+uid;

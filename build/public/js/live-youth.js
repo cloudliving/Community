@@ -32,9 +32,7 @@
 							        	'</ul>'+
 							        '</li>'+
 							        '<li>'+
-							        	'<div class="text-wrap">'+
-							        		'<p>{#intro#}</p>'+
-							        	'</div>'+
+							        	'<div class="text-wrap"></div>'+
 							        '</li>'+
 							    '</ul>'+
 							'</div>'+
@@ -47,7 +45,7 @@
 	// 活动首页
 	if (href.search('index.html')>0) {
 		// 定位我的社区
-		$.get('http://vht.cloudliving.net/index.php?m=Community&c=Index&a=department&action=my_department',{uid:uid},function(data){
+		$.get('http://weixin.cloudliving.net/community_service.php?c=Index&a=department&action=my_department',{uid:uid},function(data){
 			var data = JSON.parse(data)
 			if (data.Code != '0') { $.tips({content:data.errorMessage + '请刷新重试'}); return}
 			$('.position').text(data.result[0].title)
@@ -60,8 +58,8 @@
 
 			var target = $(e.target),
 				url = target.hasClass('position') ? 
-					'http://vht.cloudliving.net/index.php?m=Community&c=Index&a=act&action=act&type_id=1' : 
-					'http://vht.cloudliving.net/index.php?m=Community&c=Index&a=act&action=act_all&type_id=1'
+					'http://weixin.cloudliving.net/community_service.php?c=Index&a=act&action=act&type_id=1' : 
+					'http://weixin.cloudliving.net/community_service.php?c=Index&a=act&action=act_all&type_id=1'
 
 			$.get(url, {uid:uid},function(data){
 				range.removeClass('current')
@@ -108,7 +106,7 @@
 	if (href.search('detail.html')>0) {
 		var id = utils.parseHash().id
 
-		$.get('http://vht.cloudliving.net/index.php?m=Community&c=Index&a=act&action=act_detail&id='+id,{uid:uid},function(data){
+		$.get('http://weixin.cloudliving.net/community_service.php?c=Index&a=act&action=act_detail&id='+id,{uid:uid},function(data){
 			var data = JSON.parse(data), 
 				temp, 
 				obj = {},
@@ -121,7 +119,7 @@
 			obj.title = data.result.title
 			obj.heat = data.result.heat
 			obj.num = data.result.num
-			obj.intro = data.result.brief
+			// obj.intro = data.result.brief
 			obj.id = data.result.id
 			obj.join_id = data.result.join_id
 			obj.image = data.result.image
@@ -137,7 +135,8 @@
 
 			// 渲染模板并添加到页面
 			temp = template.detail.format(obj)
-			$('#wrapper').append(temp)
+			document.querySelector('#wrapper').innerHTML = temp
+			document.querySelector('.text-wrap').innerHTML = data.result.brief
 
 			// 初始化选项卡
 			;(function(){
@@ -151,7 +150,7 @@
 				if (!result.itemWidth) {
 					setTimeout(function(){
 						that()
-					}, 500)
+					}, 200)
 				}
 			})()
 

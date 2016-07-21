@@ -32,9 +32,7 @@
 							        	'</ul>'+
 							        '</li>'+
 							        '<li>'+
-							        	'<div class="text-wrap">'+
-							        		'<p>{#intro#}</p>'+
-							        	'</div>'+
+							        	'<div class="text-wrap"></div>'+
 							        '</li>'+
 							    '</ul>'+
 							'</div>'+
@@ -121,7 +119,7 @@
 			obj.title = data.result.title
 			obj.heat = data.result.heat
 			obj.num = data.result.num
-			obj.intro = data.result.brief
+			// obj.intro = data.result.brief
 			obj.id = data.result.id
 			obj.join_id = data.result.join_id
 			obj.image = data.result.image
@@ -137,7 +135,8 @@
 
 			// 渲染模板并添加到页面
 			temp = template.detail.format(obj)
-			$('#wrapper').append(temp)
+			document.querySelector('#wrapper').innerHTML = temp
+			document.querySelector('.text-wrap').innerHTML = data.result.brief
 
 			// 初始化选项卡
 			;(function(){
@@ -151,7 +150,7 @@
 				if (!result.itemWidth) {
 					setTimeout(function(){
 						that()
-					}, 500)
+					}, 200)
 				}
 			})()
 

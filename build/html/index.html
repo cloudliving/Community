@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="page-active">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -8,67 +8,26 @@
 	<meta name="format-detection" content="telphone=no, email=no"/>
 	<title>生活</title>
 	
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/flexible.js?v=1468834797485"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/flexible.js?v=1469006388807"></script>
 	<link rel="stylesheet" href="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/frozen.min.css">
-	<link rel="stylesheet" href="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/css/community.min.css?v=1468834797485">
+	<link rel="stylesheet" href="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/css/community.min.css?v=1469006388807">
 
 </head>
-<body class="page-index">
+<body>
 	
-	<!-- 内容容器 所有的内容都要放在这个div下 -->
 	<div id="wrapper">
-		<div class="banner">
-			<a href="thumb/detail.html">
-				<img src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/images/banner.jpg">
-			</a>
+		<a href="thumb/detail.html">
+			<img class="banner" src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/images/banner.jpg" alt="">
+		</a>
+
+		<div class="range">
+			<a class="current all finished" href="javascript:">全市范围</a>
+			<span class="line">|</span>
+			<a class="position finished" href="javascript:">我的社区</a>
 		</div>
-		<div class="nav-bar">
-			<ul class="clearfix"> 
-				<li>
-					<a href="live/youth/index.html">
-						<img src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/images/nav-youth.png">
-						<p>青少年发展</p>					
-					</a>
-				</li>
-				<li>
-					<a href="live/active/index.html">
-						<img src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/images/nav-active.png">
-						<p>社区活动</p>					
-					</a>
-				</li>
-				<li>
-					<a href="live/question/index.html">
-						<img src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/images/nav-question.png">
-						<p>问题汇集</p>					
-					</a>
-				</li>
-				<li>
-					<a href="live/mpmt/index.html">
-						<img src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/images/nav-mpmt.png">
-						<p>群防群治</p>					
-					</a>
-				</li>
-			</ul>
-		</div>
-		<div class="rec-act">
-			<div class="headline">
-				推荐项目活动
-			</div>
-			<div class="act-list">
-				<!-- <a href="#">
-					<div class="item">
-						<div class="show">
-							<img class="act-img" src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/images/demo-1.png">
-							<img class="status-img" src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/images/status-ing.png">
-						</div>
-						<div class="act-info">
-							<p>传说中的功夫高手亲自传授跆拳道</p>
-							<p><span class="icon-fire"></span>10000+</p>
-						</div>
-					</div>
-				</a> -->
-			</div>
-		</div>
+
+		<ul class="active-list"></ul>
+
 		<div class="g-bottom-nav">
 			<ul class="clearfix">
 				<li class="current">
@@ -78,9 +37,9 @@
 					</a>
 				</li>
 				<li>
-					<a href="social/index.html">
-						<span class="icon-house-1"></span>
-						<p>社圈</p>
+					<a href="govern/index.html">
+						<span class="icon-menu"></span>
+						<p>综合治理</p>
 					</a>
 				</li>
 				<li>
@@ -93,65 +52,11 @@
 		</div>
 	</div>
 
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/zepto.min.js?v=1468834797485"></script>
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/frozen.min.js?v=1468834797485"></script>
-	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/extends.js?v=1468834797485"></script>
-	<script>
-		(function(){
-			$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=department&action=my_department",{uid: uid},function(data){
-				if (data.Code != '0') { $.tips({content:data.errorMessage + '请刷新重试'}); return}
+	<!-- data-repeat -->
 
-				if (!data.result) location.href = "select/index.html?uid="+uid;
-			},"json");
-			$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=act&action=act_recommend",{uid: uid},function(data){
-				console.log(data);
-				if(data['Code']==0){
-					data.result.actList.forEach(function(e, index){
-						console.log(index)
-						console.log(e)
-						switch(e.status){
-							case '报名进行中':
-								data.result.actList[index].src = 'http://cloudliving-img.b0.upaiyun.com/static/Home/Community/images/status-ing.png';
-								break;
-							case '报名已截止':
-								data.result.actList[index].src = 'http://cloudliving-img.b0.upaiyun.com/static/Home/Community/images/status-stop.png';
-								break;
-							case '已结束':
-								data.result.actList[index].src = 'http://cloudliving-img.b0.upaiyun.com/static/Home/Community/images/status-end.png';
-								break;
-						}
-					});
-
-					var s = '<!-- data-repeat -->'+
-							'<a href="live/youth/detail.html?id=x.id" data-repeat="x in actList" data-actid="x.id">'+
-								'<div class="item">'+
-									'<div class="show">'+
-										'<img class="act-img" src="x.image">'+
-										'<img class="status-img" src="x.src">'+
-									'</div>'+
-									'<div class="act-info">'+
-										'<p>x.title</p>'+
-										'<p><span class="icon-fire"></span>x.heat+</p>'+
-									'</div>'+
-								'</div>'+
-							'</a>'+
-							'<!-- end data-repeat -->';
-					var temp = s.format(data.result);
-					$('.act-list').append(temp);
-					utils.loading();
-				}else{
-					utils.loading();
-					$.tips({content:data['errorMessage']});
-				}
-			},"json");
-			//热度加1
-			$(document).on('tap','.act-list>a',function(e){
-				var aid = $(this).attr('data-actid');
-				$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=act&action=act_plus_one_view",{aid:aid, uid: uid},function(data){
-					console.log(data);
-				},"json");
-			});
-		})();
-	</script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/zepto.min.js?v=1469006388807"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/frozen.min.js?v=1469006388807"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/lib/extends.js?v=1469006388807"></script>
+	<script src="http://cloudliving-img.b0.upaiyun.com/static/Home/Community/js/live-active.js?v=1469006388807"></script>
 </body>
 </html>
