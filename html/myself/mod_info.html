@@ -77,7 +77,6 @@
 			var para = utils.parseHash();
 			var JOIN_ID = "";
 			$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=act&action=my_act_detail",{id: para['id'],uid: uid},function(data){
-				console.log(data);
 				if(data['Code']==0){
 					$('#name').val(data['result']['linkman']);
 					$('#phone').val(data['result']['phone']);
@@ -97,7 +96,6 @@
 				var reg = /^1\d{10}$/; 
 				if(newphone!=""&&reg.test(newphone)){
 					$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=act&action=send_verify_code",{phone: newphone,uid: uid},function(data){
-						console.log(data);
 						if(data['Code']==0){
 							time(This);
 							VerCode = data['result']['verify_code'];

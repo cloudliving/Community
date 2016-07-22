@@ -4,7 +4,7 @@ $(function(){
 		str = '',
 		template = {
 			list: 	'<!-- data-repeat -->'+
-					'<a class="mpmt-item" href="detail.html?id=x.id" data-repeat="x in list">'+
+					'<a class="mpmt-item" href="mpmt-detail.html?id=x.id" data-repeat="x in list">'+
 		            	'<div class="main">'+
 		            	    '<h4 class="name">x.title</h4>'+
 		            	    '<p><i class="icon-position"></i>x.address</p>'+

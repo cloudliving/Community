@@ -4,7 +4,7 @@ $(function(){
 		template = {
 			list: 	'<!-- data-repeat -->'+
 					'<li class="item" data-repeat="x in list">'+
-						'<a href="detail.html?id=x.id">'+
+						'<a href="question-detail.html?id=x.id">'+
 							'<div class="top">'+
 								'<img class="thumb" src="x.image" alt="">'+
 								'<div class="wrap">'+
@@ -70,7 +70,7 @@ $(function(){
 
 					$.get('http://weixin.cloudliving.net/community_service.php?c=Index&a=question&action=question', {title: input.val(), uid: uid}, function(data){
 						if (data.Code != 0) {$.tips({content: data.errorMessage}); return}
-						if (!data.result.massPTList) {$.tips({content: '暂无搜索结果'}); return}						
+						if (!data.result.questionList) {$.tips({content: '暂无搜索结果'}); return}						
 
 						back.fadeIn()
 						cache = wrap.html()

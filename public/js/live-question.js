@@ -4,7 +4,7 @@ $(function(){
 		template = {
 			list: 	'<!-- data-repeat -->'+
 					'<li class="item" data-repeat="x in list">'+
-						'<a href="detail.html?id=x.id">'+
+						'<a href="question-detail.html?id=x.id">'+
 							'<div class="top">'+
 								'<img class="thumb" src="x.image" alt="">'+
 								'<div class="wrap">'+
@@ -19,7 +19,13 @@ $(function(){
 
 			detail: 	'<div class="complate-detail">'+
 							'<div class="hd">'+
-								'<img src="{#image#}" alt="" class="thumb">'+
+								'<div class="ui-slider">'+
+								    '<ul class="ui-slider-content">'+
+								    	'<!-- data-repeat -->'+
+								        '<li class="current" data-repeat="x in images"><span style="background-image:url(x.src)"></span></li>'+
+								        '<!-- end data-repeat -->'+
+								    '</ul>'+
+								'</div>'+
 								'<p class="title">{#title#}<span class="num">编号:{#id#}</span></p>'+
 								'<p class="info"><span class="type">{#type_name#}</span><span class="status">{#status#}</span></p>'+
 							'</div>'+
@@ -70,11 +76,10 @@ $(function(){
 
 					$.get('http://vht.cloudliving.net/index.php?m=Community&c=Index&a=question&action=question', {title: input.val(), uid: uid}, function(data){
 						if (data.Code != 0) {$.tips({content: data.errorMessage}); return}
-						if (!data.result.massPTList) {$.tips({content: '暂无搜索结果'}); return}						
+						if (!data.result.questionList) {$.tips({content: '暂无搜索结果'}); return}						
 
 						back.fadeIn()
-						cache = wrap.html()
-
+						$.tips({content: '检索出'+data.result.questionList.length+'条结果'})
 						str = template.list.format({list: data.result.questionList})
 						wrap.html(str)
 						
@@ -93,13 +98,21 @@ $(function(){
 	}
 
 	if (href.search('detail.html') >= 0) {
-		$.get('http://vht.cloudliving.net/index.php?m=Community&c=Index&a=question&action=question_detail&id='+hash.id, {uid: uid}, function(res){
-			var data = JSON.parse(res)
+		$.get('http://vht.cloudliving.net/index.php?m=Community&c=Index&a=question&action=question_detail&id='+hash.id, {uid: uid}, function(data){
 			if (data.Code != 0) { $.tips({content:data.errorMessage + '请刷新重试'}); return}
 
+			data.result.images = JSON.parse(data.result.images)
 			$('#wrapper').append(template.detail.format(data.result))
+
+			var slider = new fz.Scroll('.ui-slider', {
+			    role: 'slider',
+			    indicator: true,
+			    autoplay: true,
+			    interval: 3000
+			});
+			
 			utils.loading()
-		})
+		}, 'json')
 	}
 
 })

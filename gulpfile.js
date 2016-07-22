@@ -20,7 +20,7 @@ gulp.task("moveJs", function() {
 	return gulp.src(["./public/js/*.js"])
                 .pipe(replace(/(\.\.\/){0,4}public/g,'http://cloudliving-img.b0.upaiyun.com/static/Home/Community'))
                 // 更换正式接口
-                // .pipe(replace('vht.cloudliving.net/index.php?m=Community&c=Index', 'weixin.cloudliving.net/community_service.php?c=Index'))
+                .pipe(replace('vht.cloudliving.net/index.php?m=Community&c=Index', 'weixin.cloudliving.net/community_service.php?c=Index'))
 	            .pipe(gulp.dest("./build/public/js"));
 });
 
@@ -48,7 +48,7 @@ gulp.task('replace', function() {
     gulp.src(['./html/*.html', './html/**/*.html', './html/**/**/*.html'])
         .pipe(replace(/(\.\.\/){0,4}public/g, 'http://cloudliving-img.b0.upaiyun.com/static/Home/Community'))
         // 更换正式接口
-        // .pipe(replace('vht.cloudliving.net/index.php?m=Community&c=Index', 'weixin.cloudliving.net/community_service.php?c=Index'))
+        .pipe(replace('vht.cloudliving.net/index.php?m=Community&c=Index', 'weixin.cloudliving.net/community_service.php?c=Index'))
         .pipe(replace(/src=".+\.js/g, function(a){return a+'?v='+time}))
         .pipe(build({
             'css':'http://cloudliving-img.b0.upaiyun.com/static/Home/Community/css/community.min.css?v='+time
@@ -58,16 +58,30 @@ gulp.task('replace', function() {
 
 
 // 上传到测试服务器
-gulp.task('uploadtest', function(){
-    gulp.src(['build/html/*.html', 'build/html/**/*.html'])
+gulp.task('uploadtest', ['uploadtest-html','uploadtest-public'])
+
+gulp.task('uploadtest-html', function(){
+    gulp.src('./html/**')
         .pipe(sftp({
             host: '120.27.161.102',
             port: 22,
             user: 'root',
             pass: 'Ruan0810',
-            remotePath: '/cloudliving/dingzhiqiang/sq'
+            remotePath: '/cloudliving/dingzhiqiang/sq/html'
         }))
 })
+gulp.task('uploadtest-public', function(){
+    gulp.src('./public/**')
+        .pipe(sftp({
+            host: '120.27.161.102',
+            port: 22,
+            user: 'root',
+            pass: 'Ruan0810',
+            remotePath: '/cloudliving/dingzhiqiang/sq/public'
+        }))
+})
+
+
 
 // 上传到正式服务器
 gulp.task('upload', function(){

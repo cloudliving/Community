@@ -33,7 +33,6 @@
 	<script>
 		(function(){
 			$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=department&action=get_department",{uid:uid},function(data){
-				console.log(data);
 				//请求数据成功
 				if(data['Code']==0){
 					var s = '<!-- data-repeat -->'+
