@@ -5,6 +5,7 @@ var replace = require("gulp-replace");
 var build = require("gulp-html-replace");
 var time = new Date().valueOf();
 var sftp = require('gulp-sftp');
+var uglify = require('gulp-uglify');
 
 // 合并css
 gulp.task("concatCss", function() {
@@ -21,6 +22,7 @@ gulp.task("moveJs", function() {
                 .pipe(replace(/(\.\.\/){0,4}public/g,'http://cloudliving-img.b0.upaiyun.com/static/Home/Community'))
                 // 更换正式接口
                 .pipe(replace('vht.cloudliving.net/index.php?m=Community&c=Index', 'weixin.cloudliving.net/community_service.php?c=Index'))
+                .pipe(uglify())
 	            .pipe(gulp.dest("./build/public/js"));
 });
 
