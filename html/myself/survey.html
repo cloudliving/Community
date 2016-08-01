@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telphone=no, email=no"/>
+	<title>问卷调查</title>
+	
+	<script src="../../public/lib/flexible.js"></script>
+	<link rel="stylesheet" href="../../public/lib/frozen.min.css">
+	<!-- build:css -->
+	<link rel="stylesheet" href="../../public/css/common.css">
+	<link rel="stylesheet" href="../../public/css/myself/survey.css">
+	<!-- endbuild -->
+</head>
+<body class="my-survey">
+	
+	<!-- 内容容器 所有的内容都要放在这个div下 -->
+	<div id="wrapper">
+		<!-- <form action=""> -->
+			<div class="questionlist">
+				<!-- <div class="item">
+					<h3>你脑子有病吗？</h3>
+					<div class="option">
+						<span></span>
+						<input type="radio" name="ques0">
+						<p>有</p>
+					</div>
+					<div class="option">
+						<span></span>
+						<input type="radio" name="ques0">
+						<p>没有</p>
+					</div>
+					<div class="option">
+						<span></span>
+						<input type="radio" name="ques0">
+						<p>不知道</p>
+					</div>
+				</div> -->
+			</div>
+			<div class="subbox">
+				<input type="submit" value="提交">
+			</div>
+		<!-- </form> -->
+	</div>
+
+	<script src="../../public/lib/zepto.min.js"></script>
+	<script src="../../public/lib/frozen.min.js"></script>
+	<script src="../../public/lib/extends.js"></script>
+	<script>
+		(function(){
+			$(document).on('click','.option span',function(){
+				$(this).parents('.item').find('span').removeClass('active');
+				$(this).addClass('active');
+				$(this).siblings('input[type="radio"]').prop("checked",true);
+			});
+
+			$.get("http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=inquiry&action=get_questions&uid=UID",{uid: 11},function(data){
+				console.log(data);
+				if(data['Code']!=0){
+					utils.loading();
+					$.tips({content:data['errorMessage']});
+					return;
+				}
+				var quesList = data['result']['questionList'];
+				if(quesList){
+					var i,j;
+					for(i=0;i<quesList.length;i++){
+						console.log(quesList[i]);
+						var str1 = '<div class="item ui-border-tb" data-id="'+quesList[i]['id']+'">'+
+									'<h3>'+quesList[i]['title']+'</h3>';
+						var str2 = "";
+						var str3 = '</div>';
+						var option = quesList[i]['question'];
+						var selected = quesList[i]['selectd'];
+						for(j=0;j<option.length;j++){
+							var temp = "";
+							if(j==selected){
+								temp = '<div class="option">'+
+											'<span class="active"></span>'+
+											'<input type="radio" name="'+quesList[i]['id']+'" data-index="'+j+'">'+
+											'<p>'+option[j]['deacription']+'</p>'+
+										'</div>';
+							}else {
+								temp = '<div class="option">'+
+											'<span></span>'+
+											'<input type="radio" name="'+quesList[i]['id']+'" data-index="'+j+'">'+
+											'<p>'+option[j]['deacription']+'</p>'+
+										'</div>';
+							}
+							str2 = str2 + temp;
+						}
+						s = str1+str2+str3;
+						$('.questionlist').append(s);
+						utils.loading();
+					}
+				}
+				if(data['result']['is_answer']==1){
+					$('.subbox input').attr("disabled",true).val("感谢你已参与");
+					$(document).off('click','.option span');
+					$('.option p').css('color','#999');
+				}
+				$('.subbox input').click(function(){
+					var len = $('.option input:checked').length;
+					if(len!=quesList.length){
+						$.tips({content:"还有题目未选择，请完成后再提交"});
+					}else {
+						var quesData = [];
+						var questions = $('.item');
+						for(var i=0;i<questions.length;i++){
+							var obj = {};
+							var que_id = $(questions[i]).data('id');
+							obj.id = que_id;
+							$(".option input[name=que_id]:checked");
+							obj.selectd = $(questions[i]).find('input[type="radio"]:checked').data('index');
+							quesData.push(obj);
+						}
+						console.log(quesData);
+						$.ajax({
+							url: "http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=inquiry&action=submit_answers&uid=UID",
+							cache: false,
+							type: "get",
+							dataType: "json",
+							data: {uid:11,quesData:quesData},
+
+							success: function(data){
+								console.log(data);
+								if(data['Code']==0){
+									location.reload();
+								}else {
+									$.tips({content: data['errorMessage']});
+								}
+							}
+						});
+					}
+				});
+			},"json");
+		})();
+	</script>
+</body>
+</html>

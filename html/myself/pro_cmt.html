@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telphone=no, email=no"/>
+	<title>评论记录</title>
+	
+	<script src="../../public/lib/flexible.js"></script>
+	<link rel="stylesheet" href="../../public/lib/frozen.min.css">
+	<!-- build:css -->
+	<link rel="stylesheet" href="../../public/css/common.css">
+	<link rel="stylesheet" href="../../public/css/myself/comrecord.css">
+	<!-- endbuild -->
+</head>
+<body class="my-comrec">
+	
+	<!-- 内容容器 所有的内容都要放在这个div下 -->
+	<div id="wrapper">
+		<div class="head ui-border-b">
+			<p>社区生活正在积极开展中，来看看都发生着什么吧</p>
+			<div class="see">
+				<a href="../index.html">瞅一眼</a>
+			</div>
+		</div>
+		<div class="content">
+			<p class="headline ui-border-tb">评论记录</p>
+			<div class="recordlist">
+				<!-- <div class="item">
+					<p class="time">12月09号</p>
+					<div class="con">
+						<p>那时候最好的我们，很怀念。</p>
+						<p>舞台演绎网络剧《最好的我们》</p>
+						<p class="clearfix">
+							<span class="icon-heart"></span>
+							<span class="num">123</span>
+						</p>
+					</div>
+				</div> -->
+			</div>
+		</div>
+	</div>
+
+	<script src="../../public/lib/zepto.min.js"></script>
+	<script src="../../public/lib/frozen.min.js"></script>
+	<script src="../../public/lib/extends.js"></script>
+	<script>
+		(function(){
+			$.get("http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=act&action=act_comment_list&aid=AID&uid=UID",{uid:uid},function(data){
+				console.log(data);
+				if(data['Code']!=0){
+					$.tips({content: data['errorMessage']});
+					return;
+				}
+				if(data['result']['actCommentList']){
+					var s = '<!-- data-repeat -->'+
+							'<div class="item ui-border-b" data-repeat="x in actCommentList">'+
+								'<p class="time">x.ctime</p>'+
+								'<div class="con">'+
+									'<p>x.content</p>'+
+									'<p>x.title</p>'+
+									'<p class="clearfix">'+
+										'<span class="icon-heart"></span>'+
+										'<span class="num">x.likecount</span>'+
+									'</p>'+
+								'</div>'+
+							'</div>'+
+							'<!-- end data-repeat -->';
+					s = s.format(data.result);
+					$('.recordlist').append(s);
+				}else{//没有评论记录
+					$('.recordlist').append('<p class="none">无评论记录</p>');
+				}
+			},"json");
+			utils.loading();
+		})();
+	</script>
+</body>
+</html>

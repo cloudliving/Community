@@ -6,51 +6,20 @@
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	<meta name="format-detection" content="telphone=no, email=no"/>
-	<title>综合治理</title>
+	<title>我的收藏</title>
 	
 	<script src="../../public/lib/flexible.js"></script>
 	<link rel="stylesheet" href="../../public/lib/frozen.min.css">
 	<!-- build:css -->
 	<link rel="stylesheet" href="../../public/css/common.css">
-	<link rel="stylesheet" href="../../public/css/govern/index.css">
+	<link rel="stylesheet" href="../../public/css/myself/pro_act.css">
 	<!-- endbuild -->
 </head>
-<body class="page-composite">
+<body class="my-act">
 	
 	<!-- 内容容器 所有的内容都要放在这个div下 -->
 	<div id="wrapper">
-		<div class="content">
-			<a href="question-index.html" class="item">
-				<img src="../../public/images/nav-question.png">
-				<p>问题汇集</p>
-			</a>
-			<a href="mpmt-index.html" class="item">
-				<img src="../../public/images/nav-mpmt.png">
-				<p>群防群治</p>
-			</a>
-		</div>
-		<div class="g-bottom-nav ui-border-t">
-			<ul class="clearfix">
-				<li>
-					<a href="../index.html">
-						<span class="icon-coffee"></span>
-						<p>生活</p>
-					</a>
-				</li>
-				<li class="current">
-					<a href="index.html">
-						<span class="icon-menu"></span>
-						<p>综合治理</p>
-					</a>
-				</li>
-				<li>
-					<a href="../myself/index.html">
-						<span class="icon-user-1"></span>
-						<p>我</p>
-					</a>
-				</li>
-			</ul>
-		</div>
+		<div class="contain"></div>
 	</div>
 
 	<script src="../../public/lib/zepto.min.js"></script>
@@ -58,7 +27,24 @@
 	<script src="../../public/lib/extends.js"></script>
 	<script>
 		(function(){
-			utils.loading();
+			$.get("http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=act&action=my_keep_act",{uid: uid},function(data){
+				if (data.Code != 0) {$.tips({content: data.errorMessage + '请刷新重试'}); return}
+
+				var s = '<!-- data-repeat -->'+
+						'<a href="../live/detail.html?id=x.id" class="item" data-repeat="x in actList">'+
+							'<p class="date">x.ctime</p>'+
+							'<p class="tit">x.title</p>'+
+							'<p class="number">编号 x.id</p>'+
+							'<p class="time">项目时间 x.setime</p>'+
+						'</a>'+
+						'<!-- end data-repeat -->';
+
+				s = data.result.actList ? s.format(data.result) : '<p class="none">暂无数据</p>'
+
+				$('.contain').append(s);
+
+				utils.loading();
+			},"json");
 		})();
 	</script>
 </body>

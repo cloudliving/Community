@@ -14,9 +14,18 @@
 
 			detail: '<div class="act-detail">'+
 						'<div class="hd">'+
-							'<img src="{#image#}" alt="" class="thumb">'+
+							'<img src="{#image#}" alt="" class="banner">'+
 							'<p class="title">{#title#}</p>'+
-							'<p class="clearfix"><span class="hot">热度:{#heat#}</span><span class="num">编号:{#num#}</span></p>'+
+							'<div class="attr-wrap">'+
+								'<div class="attr">	'+
+									'<p class="hot">热度:{#heat#}</p>'+
+									'<p class="num">编号:{#num#}</p>'+
+								'</div>'+
+								'<div class="btn-wrap">	'+
+									'<button class="collect type{#is_keep#}"><i class="icon-star-{#is_keep#}"></i></button>'+
+									'<a href="http://weixin.cloudliving.net/index.php?m=CAPI&c=Index&a=write&join_id={#join_id#}" class="btn"></a>'+
+								'</div>'+
+							'</div>'+
 						'</div>'+
 						'<div class="bd">'+
 							'<div class="ui-tab">'+
@@ -29,7 +38,7 @@
 							        	'<ul class="info-list">'+
 					        				'<!-- data-repeat -->'+
 							        		'<li class="item clearfix" data-repeat="x in list"><span class="left">x.key</span><span class="right x.class">x.value</span></li>'+
-							        		'<!-- end data-repeat -->'+
+							        		'<!-- end data-repeat -->'+ '\n' +
 							        	'</ul>'+
 							        '</li>'+
 							        '<li>'+
@@ -37,10 +46,21 @@
 							        '</li>'+
 							    '</ul>'+
 							'</div>'+
-						'</div>'+
-					'</div>'+
 
-					'<div class="btn-wrap"><button data-href="http://weixin.cloudliving.net/index.php?m=CAPI&c=Index&a=write&join_id={#join_id#}" class="btn"></button></div>'
+				        	'<a class="act-show" href="act-show.html?id={#id#}">活动秀 <span class="show-img" style="background-image: url({#act_show_first_image#})"></span></a>'+
+
+				        	'<div class="cmt nodata">'+
+    							'<p class="cmt-title">评论 <span class="cmt-title-num">(<span></span>)</span></p>'+
+    							'<ul class="cmt-list"></ul>'+
+
+    							'<form action="" class="cmt-form ui-border-t">'+
+    								'<input type="text" class="cmt-input" placeholder="写评论">'+
+    								'<button class="cmt-send">发送</button>'+
+    							'</form>'+
+    						'</div>'+
+
+						'</div>'+
+					'</div>'
 		}
 	// 活动详情
 	if (href.search('detail.html')>0) {
@@ -64,6 +84,8 @@
 			obj.id = data.result.id
 			obj.join_id = data.result.join_id
 			obj.image = data.result.image
+			obj.is_keep = data.result.is_keep
+			obj.act_show_first_image = data.result.act_show_first_image
 			obj.list = []
 			obj.list.push({key: '活动时间', value: data.result.setime})
 			obj.list.push({key: '报名截止时间', value: data.result.jtime})
@@ -136,6 +158,7 @@
 				}
 			}
 
+			// 报名逻辑
 			btn.on('tap', function(e){
 				e.preventDefault()
 
@@ -158,8 +181,97 @@
 					}
 
 				}, 'json')
-
 			})
+
+			// 收藏
+			$('.collect').on('tap', function(){
+				var that = $(this), 
+					star = that.children('i')
+
+				if (star.hasClass('icon-star-0')) {
+					$.get('http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=act&action=act_keep', {uid: uid, aid: data.result.id}, function(res){
+						star.removeClass('icon-star-0').addClass('icon-star-1')
+						that.addClass('type1')
+						$.tips({content: '收藏成功'})
+					})
+				}
+			})
+
+			// 评论逻辑
+			;(function(){
+				var wrap = $('.act-detail'),
+					cmt = $('.cmt'),
+					form = $('.cmt-form'),
+					input = $('.cmt-input'),
+					list = $('.cmt-list'),
+					num = $('.cmt-title-num'),
+					body = $('body'),
+					ot = cmt.offset().top,
+					aid = data.result.id,
+					datas = data.result.cmt_list,
+					cmt_num = datas && datas.length || 0,
+					str = ''
+
+				// 渲染评论列表
+				if (datas) {
+					for (var i = 0; i < datas.length; i++) {
+						str += renderCmt(datas[i])
+					}
+					list.append(str)
+					num.text('('+cmt_num+')')
+					cmt.removeClass('nodata')
+				}
+
+
+				// 事件绑定
+				cmt.on('tap', function(e){
+					var target = e.target,
+						btn = $(target).parent('button'),
+						num = $(target).siblings('.thumb-num'),
+						number = Number(num.text()),
+						cmt_id = $(target).parents('li').attr('data-id')
+
+					// 点赞
+					if (target.nodeName == 'I') {
+						if (btn.hasClass('status1')) {
+							btn.removeClass('status1')
+							num.text(number-1)
+						} else {
+							btn.addClass('status1')
+							num.text(number+1)
+						}
+						$.get('http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=act&action=act_comment_like_or_not', {uid: uid, cid: cmt_id})
+					}
+				})
+
+				// 优化软键盘弹出显示效果
+				input.on('focus', function(){
+					body.scrollTop(9999)
+					wrap.addClass('open-key')
+				}).on('blur', function(){
+					wrap.removeClass('open-key')
+				})
+
+				// 评论提交
+				form.on('submit', function(e){
+					e.preventDefault()
+
+					var text = input.val()
+
+					if (text.length == 0) { $.tips({content: '请输入内容后再提交'}); return }
+					$.get('http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=act&action=act_comment', {uid: uid, aid: aid, content: text}, function(res){
+						cmt_num++
+						input.val('')
+						
+						list.append(renderCmt(res.just_commit_cmt_list[0]))
+						cmt.removeClass('nodata')
+						num.text('('+cmt_num+')')
+
+						body.scrollTop(ot)
+						$.tips({content: '评论成功'})
+					}, 'json')
+				})
+			})()
 
 			// 解除遮罩
 			utils.loading()
@@ -200,3 +312,59 @@
 		utils.loading()
 	}
 })()
+
+
+
+// {
+// 	Code: 0,
+// 	result: {
+// 		balabala: 'balabala',
+// 		// ... ... 
+
+// 		cmt_list: [
+// 			{
+// 				// 显示字段
+// 				avatar : 'url', // 用户头像
+// 				name : 'heheda', // 用户昵称
+// 				time : '2016-01-20 15:00', // 评论时间
+// 				ctn : '活动不错', // 评论内容
+// 				thumb : 27 , // 点赞数
+
+// 				// 逻辑字段
+// 				is_thumb : 1 , // 是否点赞 , 当前用户对这条评论是否点过赞,  1点了 , 0没点
+// 				cmt_id : 1 , // 评论id
+// 			}
+// 		]
+// 	}
+// }
+
+
+function scrollTo(element, to, duration) {
+    if (duration <= 0) return;
+    var difference = to - element.scrollTop;
+    var perTick = difference / duration * 10;
+
+    setTimeout(function() {
+        element.scrollTop = element.scrollTop + perTick;
+        if (element.scrollTop === to) return;
+        scrollTo(element, to, duration - 10);
+    }, 10);
+}
+
+function renderCmt(data){
+	return '<li class="cmt-list-item ui-border-b" data-id='+data.cmt_id+'>'+
+				'<img src="'+data.avatar+'" alt="" class="ctn-avatar">'+
+				'<div class="ctn-wrap">'+
+					'<div class="ctn-head">'+
+						'<p class="ctn-name">'+data.name+'</p>'+
+						'<p class="ctn-time">'+data.time+'</p>'+
+						'<button class="thumb status'+data.is_thumb+'" data-thumb="'+data.thumb+'">'+
+							'<span class="thumb-num">'+data.thumb+'</span>'+
+							'<i class="icon-heart"></i>'+
+						'</button>'+
+					'</div>'+
+					'<div class="ctn-ctn">'+data.cnt+'</div>'+
+				'</div>'+
+			'</li>'+
+			'<!-- end data-repeat -->'
+}

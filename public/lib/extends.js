@@ -25,6 +25,7 @@ String.prototype.format = function(obj){
 }
 
 
+
 // 工具对象
 var utils = {}
 
@@ -88,29 +89,31 @@ utils.parseHash = function(){
 }
 
 // 给链接加上UID尾巴, 包括动态添加的
-var uid = (utils.parseHash() && utils.parseHash().uid) || 108391
-;(function(){
-	var clock;
-	clearTimeout(clock)
-	$('body').on('DOMNodeInserted', function(){
-		clearTimeout(clock)
-		clock = setTimeout(add, 300)
-	})
-
-	function add(){
-		$('a').not('.finished').on('click', function(e){
-			e.preventDefault()
-			var href = $(this).attr('href')
-
-			if (href.indexOf("?")>0) {
-				location.href = href + '&uid=' + uid
-			} else {
-				location.href = href + '?uid=' + uid
-			}
-		}).addClass('finished')
-	}
-
-	add()
-})()
+var uid = (utils.parseHash() && utils.parseHash().uid) || localStorage.getItem('uid') || 109980
+localStorage.setItem('uid', uid)
 
 
+
+// ;(function(){
+// 	var clock;
+// 	clearTimeout(clock)
+// 	$('body').on('DOMNodeInserted', function(){
+// 		clearTimeout(clock)
+// 		clock = setTimeout(add, 300)
+// 	})
+
+// 	function add(){
+// 		$('a').not('.finished').on('click', function(e){
+// 			e.preventDefault()
+// 			var href = $(this).attr('href')
+
+// 			if (href.indexOf("?")>0) {
+// 				location.href = href + '&uid=' + uid
+// 			} else {
+// 				location.href = href + '?uid=' + uid
+// 			}
+// 		}).addClass('finished')
+// 	}
+
+// 	add()
+// })()

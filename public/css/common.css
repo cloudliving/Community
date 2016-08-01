@@ -23,11 +23,11 @@ em {color: inherit;}
 /* icon */
 @font-face {
     font-family: 'icomoon';
-    src:    url('../../public/fonts/icomoon.eot?0719-1');
-    src:    url('../../public/fonts/icomoon.eot?0719-1#iefix') format('embedded-opentype'),
-        url('../../public/fonts/icomoon.ttf?0719-1') format('truetype'),
-        url('../../public/fonts/icomoon.woff?0719-1') format('woff'),
-        url('../../public/fonts/icomoon.svg?0719-1#icomoon') format('svg');
+    src:    url('../../public/fonts/icomoon.eot?0728');
+    src:    url('../../public/fonts/icomoon.eot?0728#iefix') format('embedded-opentype'),
+        url('../../public/fonts/icomoon.ttf?0728') format('truetype'),
+        url('../../public/fonts/icomoon.woff?0728') format('woff'),
+        url('../../public/fonts/icomoon.svg?0728#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -47,27 +47,38 @@ em {color: inherit;}
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-house-2:before {content: '\e910';}
-.icon-menu:before {content: '\e90e';}
-.icon-arrow-down-1:before {content: '\e909';}
-.icon-heart:before {content: '\e908';}
-.icon-cap:before {content: '\e900';}
-.icon-clock:before {content: '\e901';}
-.icon-coffee:before {content: '\e902';}
-.icon-fire:before {content: '\e903';}
-.icon-house:before {content: '\e904';}
-.icon-house-1:before {content: '\e905';}
+.icon-fire:before {content: '\e900';}
+.icon-heart:before {content: '\e901';}
+.icon-house:before {content: '\e902';}
+.icon-house-1:before {content: '\e903';}
+.icon-house-2:before {content: '\e904';}
+.icon-menu:before {content: '\e905';}
 .icon-position:before {content: '\e906';}
 .icon-question:before {content: '\e907';}
-.icon-search:before {content: '\e90a';}
-.icon-share:before {content: '\e90b';}
+.icon-right .path1:before {opacity: .5;color: rgb(56, 211, 151); content: '\e918'; }
+.icon-right .path2:before {margin-left: -1em; color: rgb(56, 211, 151);content: '\e919'; }
+.icon-search:before {content: '\e908';}
+.icon-share:before {content: '\e909';}
+.icon-star-0:before {content: '\e90a';}
+.icon-star-1:before {content: '\e90b';}
 .icon-user:before {content: '\e90c';}
 .icon-user-1:before {content: '\e90d';}
-.icon-ball:before {content: '\e90f';}
+.icon-write:before {content: '\e90e';}
+.icon-about:before {content: '\e90f';}
+.icon-arrow-down-1:before {content: '\e910';}
+.icon-arrow-right:before {content: '\e911';}
+.icon-ball:before {content: '\e912';}
+.icon-callback:before {content: '\e913';}
+.icon-cap:before {content: '\e914';}
+.icon-clock:before {content: '\e915';}
+.icon-coffee:before {content: '\e916';}
+.icon-comment:before {content: '\e917';}
+
+
 
 
 /* 底部固定导航 */
-.g-bottom-nav {position: fixed; z-index: 2; bottom: 0; left: 0; width: 100%; padding: .15rem 0; border-top: 1px solid #cdcdcd;background-color: rgba(255, 255, 255, .98); }
+.g-bottom-nav {position: fixed; z-index: 2; bottom: 0; left: 0; width: 100%; padding: .15rem 0; background-color: #fff; }
 .g-bottom-nav ul {position: relative;}
 .g-bottom-nav ul li {display: block; width: 33.3%; text-align: center;}
 .g-bottom-nav ul li:nth-child(1) {position: absolute; top: 0; left: 0;}
