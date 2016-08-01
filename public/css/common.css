@@ -6,7 +6,7 @@ em {color: inherit;}
 #loading {position: fixed; z-index: 998; top: 0; left: 0; width: 100%; height: 100%; background: #f8fafa url('../../public/images/loading.gif') center/3.5rem no-repeat;}
 .clearfix:after {clear: both; content: '.'; display: block; visibility: hidden; height: 0;}
 .ui-poptips-cnt i {display: none;}
-.none {line-height: 100px; text-align: center; color: #ff9d46;}
+.none {display: block; line-height: 100px; text-align: center; color: #ff9d46;}
 
 /* animation */
 .fadein {display: block !important; -webkit-animation: 1s ease-out backwards; animation: 1s ease-out backwards; -webkit-animation-name: fadein; -moz-animation-name: fadein; -ms-animation-name: fadein; animation-name: fadein;}

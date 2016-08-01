@@ -22,6 +22,8 @@ gulp.task("moveJs", function() {
                 .pipe(replace(/(\.\.\/){0,4}public/g,'http://cloudliving-img.b0.upaiyun.com/static/Home/Community'))
                 // 更换正式接口
                 .pipe(replace('vht.cloudliving.net/index.php?m=Community&c=Index', 'weixin.cloudliving.net/community_service.php?c=Index'))
+                // 替换报名链接
+                .pipe(replace('vht.cloudliving.net/community_service.php?c=Index&a=write', 'weixin.cloudliving.net/index.php?m=CAPI&c=Index&a=write'))
                 .pipe(uglify())
 	            .pipe(gulp.dest("./build/public/js"));
 });

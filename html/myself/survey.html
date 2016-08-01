@@ -50,15 +50,14 @@
 	<script src="../../public/lib/frozen.min.js"></script>
 	<script src="../../public/lib/extends.js"></script>
 	<script>
-		(function(){
+		;(function(){
 			$(document).on('click','.option span',function(){
 				$(this).parents('.item').find('span').removeClass('active');
 				$(this).addClass('active');
 				$(this).siblings('input[type="radio"]').prop("checked",true);
 			});
 
-			$.get("http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=inquiry&action=get_questions&uid=UID",{uid: 11},function(data){
-				console.log(data);
+			$.get("http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=inquiry&action=get_questions&uid=UID",{uid: uid},function(data){
 				if(data['Code']!=0){
 					utils.loading();
 					$.tips({content:data['errorMessage']});
@@ -68,7 +67,6 @@
 				if(quesList){
 					var i,j;
 					for(i=0;i<quesList.length;i++){
-						console.log(quesList[i]);
 						var str1 = '<div class="item ui-border-tb" data-id="'+quesList[i]['id']+'">'+
 									'<h3>'+quesList[i]['title']+'</h3>';
 						var str2 = "";
@@ -96,6 +94,9 @@
 						$('.questionlist').append(s);
 						utils.loading();
 					}
+				} else {
+					$('.questionlist').append('<p class="none">敬请期待...</p>');
+					utils.loading();
 				}
 				if(data['result']['is_answer']==1){
 					$('.subbox input').attr("disabled",true).val("感谢你已参与");
@@ -117,18 +118,22 @@
 							obj.selectd = $(questions[i]).find('input[type="radio"]:checked').data('index');
 							quesData.push(obj);
 						}
-						console.log(quesData);
 						$.ajax({
 							url: "http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=inquiry&action=submit_answers&uid=UID",
 							cache: false,
 							type: "get",
 							dataType: "json",
-							data: {uid:11,quesData:quesData},
+							data: {uid:uid,quesData:quesData},
 
 							success: function(data){
-								console.log(data);
 								if(data['Code']==0){
-									location.reload();
+									$.tips({
+										content: '提交成功',
+										stayTime: 1000
+									})
+									setTimeout(function(){
+										location.href = 'index.html'
+									}, 1500)
 								}else {
 									$.tips({content: data['errorMessage']});
 								}

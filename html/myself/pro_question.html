@@ -47,7 +47,7 @@
 		$.get('http://vht.cloudliving.net/index.php?m=Community&c=Index&a=question&action=my_question', {uid: uid}, function(data){
 			if (data.Code != 0) { $.tips({content:data.errorMessage + '请刷新重试'}); return}
 
-			var str = !data.result.myQuestionList ? '<p class="none">暂无数据</p>' : template.format({list: data.result.myQuestionList})
+			var str = !data.result.myQuestionList ? '<p class="none">还没有上报任何问题</p>' : template.format({list: data.result.myQuestionList})
 			$('.question-list').append(str)
 			utils.loading()
 		}, 'json')

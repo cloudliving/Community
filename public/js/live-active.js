@@ -1,4 +1,4 @@
-(function(){
+;(function(){
 	var href = location.href,
 		template = {
 			index: 	'<!-- data-repeat -->'+
@@ -6,32 +6,34 @@
 						'<a class="wrap" href="live/detail.html?id=x.id">'+
 							'<img src="x.image" class="thumb">'+
 							'<p class="title">x.title</p>'+
-							'<p class="hot"><i class="icon-fire"></i> x.heat</p>'+
-							'<p class="commu"><i class="icon-house-2"></i> x.department_name</p>'+
+							'<div class="flex-wrap">'+
+								'<p class="hot"><i class="icon-fire"></i> x.heat</p>'+
+								'<p class="commu"><i class="icon-house-2"></i> x.department_name</p>'+
+							'</div>'+
 						'</a>'+
 					'</li>'+
 					'<!-- end data-repeat -->',
 
-			detail: '<div class="act-detail">'+
+			detail: '<div class="act-detail open-key">'+
 						'<div class="hd">'+
 							'<img src="{#image#}" alt="" class="banner">'+
 							'<p class="title">{#title#}</p>'+
 							'<div class="attr-wrap">'+
 								'<div class="attr">	'+
-									'<p class="hot">热度:{#heat#}</p>'+
 									'<p class="num">编号:{#num#}</p>'+
+									'<p class="hot">热度:{#heat#}</p>'+
 								'</div>'+
 								'<div class="btn-wrap">	'+
 									'<button class="collect type{#is_keep#}"><i class="icon-star-{#is_keep#}"></i></button>'+
-									'<a href="http://weixin.cloudliving.net/index.php?m=CAPI&c=Index&a=write&join_id={#join_id#}" class="btn"></a>'+
+									'<a href="http://vht.cloudliving.net/community_service.php?c=Index&a=write&join_id={#join_id#}" class="btn"></a>'+	
 								'</div>'+
 							'</div>'+
 						'</div>'+
 						'<div class="bd">'+
 							'<div class="ui-tab">'+
 							    '<ul class="ui-tab-nav ui-border-b">'+
-							        '<li class="current">活动信息</li>'+
-							        '<li>活动介绍</li>'+
+							        '<li class="current">信息</li>'+
+							        '<li>介绍</li>'+
 							    '</ul>'+
 							    '<ul class="ui-tab-content" style="width:200%">'+
 							        '<li class="current">'+
@@ -129,15 +131,19 @@
 					btn.text('已报名')
 					btn.addClass('joined')
 				} else {
-					if (type == 1) {
-						btn.text('我要报名')
-						btn.addClass('start')
-					} else if (type == 3) {
-						btn.text('进行中')
-						btn.addClass('joined')
-					} else {
-						btn.addClass('end')
-						btn.text(data.result.status)
+					switch (type) {
+						case 1:
+							btn.text('我要报名')
+							btn.addClass('start')
+							break;
+						case 3:
+							btn.text('报名截止')
+							btn.addClass('end')
+							break;
+						default:
+							btn.text(data.result.status)
+							btn.addClass('end')
+							break;
 					}
 				}
 			} else {
@@ -145,25 +151,29 @@
 					btn.text('已报名')
 					btn.addClass('joined')
 				} else {
-					if (type == 1) {
-						btn.text('我要报名')
-						btn.addClass('start')
-					} else if (type == 3) {
-						btn.text('进行中')
-						btn.addClass('joined')
-					} else {
-						btn.addClass('end')
-						btn.text(data.result.status)
+					switch (type) {
+						case 1:
+							btn.text('我要报名')
+							btn.addClass('start')
+							break;
+						case 3:
+							btn.text('报名截止')
+							btn.addClass('end')
+							break;
+						default:
+							btn.text(data.result.status)
+							btn.addClass('end')
+							break;
 					}
 				}
 			}
 
 			// 报名逻辑
-			btn.on('tap', function(e){
+			btn.on('click', function(e){
 				e.preventDefault()
 
 				var community = data.result.department_title
-					href = $(this).attr('data-href') + '&uid=' + uid
+					href = $(this).attr('href') + '&uid=' + uid
 
 				$.get('http://vht.cloudliving.net/index.php?m=Community&c=Index&a=department&action=my_department', {uid:uid},function(data){
 					if (data.Code != '0') { $.tips({content:data.errorMessage + '请刷新重试'}); return}
@@ -194,6 +204,19 @@
 						that.addClass('type1')
 						$.tips({content: '收藏成功'})
 					})
+				} else {
+					$.dialog({
+						content: '是否取消收藏',
+						button: ['确认', '取消']
+					});
+
+					$('#dialogButton0').on('tap', function(){
+						$.get('http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=act&action=act_keep', {uid: uid, aid: data.result.id}, function(res){
+							star.removeClass('icon-star-1').addClass('icon-star-0')
+							that.removeClass('type1')
+							$.tips({content: '已取消收藏'})
+						})
+					})
 				}
 			})
 
@@ -207,6 +230,7 @@
 					num = $('.cmt-title-num'),
 					body = $('body'),
 					ot = cmt.offset().top,
+					wh = $(window).height(),
 					aid = data.result.id,
 					datas = data.result.cmt_list,
 					cmt_num = datas && datas.length || 0,
@@ -222,6 +246,15 @@
 					cmt.removeClass('nodata')
 				}
 
+				// 滚动显示评论框
+				$(window).on('scroll', function(e){
+					var h = body.scrollTop()
+					if (h+wh>ot+80) {
+						wrap.removeClass('open-key')
+					} else {
+						wrap.addClass('open-key')
+					}
+				})
 
 				// 事件绑定
 				cmt.on('tap', function(e){
@@ -263,7 +296,7 @@
 						cmt_num++
 						input.val('')
 						
-						list.append(renderCmt(res.just_commit_cmt_list[0]))
+						list.prepend(renderCmt(res.just_commit_cmt_list[0]))
 						cmt.removeClass('nodata')
 						num.text('('+cmt_num+')')
 

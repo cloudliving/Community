@@ -20,7 +20,7 @@
 	<!-- 内容容器 所有的内容都要放在这个div下 -->
 	<div id="wrapper">
 		<div class="head ui-border-b">
-			<p>社区生活正在积极开展中，来看看都发生着什么吧</p>
+			<p>社区活动正在积极开展中来看看都发生着什么吧~</p>
 			<div class="see">
 				<a href="../index.html">瞅一眼</a>
 			</div>
@@ -28,17 +28,6 @@
 		<div class="content">
 			<p class="headline ui-border-tb">评论记录</p>
 			<div class="recordlist">
-				<!-- <div class="item">
-					<p class="time">12月09号</p>
-					<div class="con">
-						<p>那时候最好的我们，很怀念。</p>
-						<p>舞台演绎网络剧《最好的我们》</p>
-						<p class="clearfix">
-							<span class="icon-heart"></span>
-							<span class="num">123</span>
-						</p>
-					</div>
-				</div> -->
 			</div>
 		</div>
 	</div>
@@ -56,7 +45,7 @@
 				}
 				if(data['result']['actCommentList']){
 					var s = '<!-- data-repeat -->'+
-							'<div class="item ui-border-b" data-repeat="x in actCommentList">'+
+							'<a class="item ui-border-b" href="../live/detail.html?id=x.aid" data-repeat="x in actCommentList">'+
 								'<p class="time">x.ctime</p>'+
 								'<div class="con">'+
 									'<p>x.content</p>'+
@@ -66,12 +55,12 @@
 										'<span class="num">x.likecount</span>'+
 									'</p>'+
 								'</div>'+
-							'</div>'+
+							'</a>'+
 							'<!-- end data-repeat -->';
 					s = s.format(data.result);
 					$('.recordlist').append(s);
 				}else{//没有评论记录
-					$('.recordlist').append('<p class="none">无评论记录</p>');
+					$('.recordlist').append('<p class="none">还没有发表任何活动评论</p>');
 				}
 			},"json");
 			utils.loading();
