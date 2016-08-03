@@ -25,24 +25,21 @@
 					<h3>你脑子有病吗？</h3>
 					<div class="option">
 						<span></span>
-						<input type="radio" name="ques0">
 						<p>有</p>
 					</div>
 					<div class="option">
 						<span></span>
-						<input type="radio" name="ques0">
 						<p>没有</p>
 					</div>
 					<div class="option">
 						<span></span>
-						<input type="radio" name="ques0">
 						<p>不知道</p>
 					</div>
 				</div> -->
 			</div>
-			<div class="subbox">
+			<!-- <div class="subbox">
 				<input type="submit" value="提交">
-			</div>
+			</div> -->
 		<!-- </form> -->
 	</div>
 
@@ -51,12 +48,8 @@
 	<script src="../../public/lib/extends.js"></script>
 	<script>
 		;(function(){
-			$(document).on('click','.option span',function(){
-				$(this).parents('.item').find('span').removeClass('active');
-				$(this).addClass('active');
-				$(this).siblings('input[type="radio"]').prop("checked",true);
-			});
-
+			// 渲染dom
+			var quesBox = $('.questionlist');
 			$.get("http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=inquiry&action=get_questions&uid=UID",{uid: uid},function(data){
 				if(data['Code']!=0){
 					utils.loading();
@@ -64,60 +57,55 @@
 					return;
 				}
 				var quesList = data['result']['questionList'];
+
 				if(quesList){
-					var i,j;
-					for(i=0;i<quesList.length;i++){
-						var str1 = '<div class="item ui-border-tb" data-id="'+quesList[i]['id']+'">'+
-									'<h3>'+quesList[i]['title']+'</h3>';
-						var str2 = "";
-						var str3 = '</div>';
-						var option = quesList[i]['question'];
-						var selected = quesList[i]['selectd'];
-						for(j=0;j<option.length;j++){
-							var temp = "";
-							if(j==selected){
-								temp = '<div class="option">'+
-											'<span class="active"></span>'+
-											'<input type="radio" name="'+quesList[i]['id']+'" data-index="'+j+'">'+
-											'<p>'+option[j]['deacription']+'</p>'+
-										'</div>';
-							}else {
-								temp = '<div class="option">'+
-											'<span></span>'+
-											'<input type="radio" name="'+quesList[i]['id']+'" data-index="'+j+'">'+
-											'<p>'+option[j]['deacription']+'</p>'+
-										'</div>';
-							}
-							str2 = str2 + temp;
-						}
-						s = str1+str2+str3;
-						$('.questionlist').append(s);
-						utils.loading();
-					}
+					quesList.forEach(function(el, index){
+						var str = '<div class="item ui-border-tb" data-id="{#id#}">'+
+									'<h3>'+(index+1)+'.'+el.title+'</h3>'+
+									'<!-- data-repeat -->'+
+									'<div class="option" data-repeat="x in question">'+
+										'<span></span>'+
+										'<p>x.deacription</p>'+
+									'</div>'+
+								    '<!-- end data-repeat -->'+
+									'</div>';
+
+						var s = str.format(el);
+						quesBox.append(s);
+					})
+					$('#wrapper').append('<div class="subbox"><input type="submit" value="提交"></div>');
+					utils.loading();
 				} else {
-					$('.questionlist').append('<p class="none">敬请期待...</p>');
+					quesBox.append('<p class="none">敬请期待...</p>');
 					utils.loading();
 				}
+
 				if(data['result']['is_answer']==1){
+					var itemDom = $('.item');
+					itemDom.forEach(function(el,index){
+						$(el).find('span').eq(quesList[index]['selectd']).addClass('active');
+					});
 					$('.subbox input').attr("disabled",true).val("感谢你已参与");
-					$(document).off('click','.option span');
-					$('.option p').css('color','#999');
+					$(document).off('tap','.option');
+					$('.option').addClass('submitted');
 				}
-				$('.subbox input').click(function(){
-					var len = $('.option input:checked').length;
+
+				// 提交逻辑
+				$(document).on('click','.subbox input',function(){
+					var len = $('.option .active').length;
 					if(len!=quesList.length){
 						$.tips({content:"还有题目未选择，请完成后再提交"});
 					}else {
 						var quesData = [];
 						var questions = $('.item');
-						for(var i=0;i<questions.length;i++){
-							var obj = {};
-							var que_id = $(questions[i]).data('id');
-							obj.id = que_id;
-							$(".option input[name=que_id]:checked");
-							obj.selectd = $(questions[i]).find('input[type="radio"]:checked').data('index');
-							quesData.push(obj);
-						}
+
+						questions.each(function(index, el){
+							var id = $(this).data('id'),
+								_index = $(this).find('span').index($(this).find('.active'))
+
+							quesData.push({id: id, selectd: _index})
+						})
+						
 						$.ajax({
 							url: "http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=inquiry&action=submit_answers&uid=UID",
 							cache: false,
@@ -141,8 +129,17 @@
 						});
 					}
 				});
+
 			},"json");
 		})();
+
+
+
+		// 选题逻辑
+		$(document).on('click','.option',function(){
+			$(this).parents('.item').find('span').removeClass('active');
+			$(this).find('span').addClass('active');
+		});
 	</script>
 </body>
 </html>

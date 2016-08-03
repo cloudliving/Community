@@ -6,17 +6,19 @@
 	background-color: #fff;
 	margin-bottom: 0.2rem;
 }
+.my-survey .item h3 {
+	margin: 0.1rem 0;
+}
 .my-survey .item .option {
 	position: relative;
-	margin-top: 0.25rem;
 }
 .my-survey .item .option input[type="radio"] {
 	display: none;
 }
 .my-survey .item .option span {
 	position: absolute;
-	top: 0;
-	left: 0;
+	top: 0.15rem;
+	left: 10px;
 	display: inline-block;
 	width: 18px;
 	height: 18px;
@@ -25,9 +27,13 @@
 	border-radius: 10px;
 }
 .my-survey .item .option p {
-	padding-left: 30px;
+	padding: 0.15rem 0;
+	padding-left: 40px;
 	font-size: 14px;
 	line-height: 18px;
+}
+.my-survey .item .option:active {
+	background: #f5f5f5;
 }
 .my-survey .item .option span.active {
 	border: 1px solid #39d598;
@@ -55,4 +61,10 @@
 	background-color: #39d397;
 	border: none;
 	color: #fff;
+}
+.my-survey .option.submitted {
+	pointer-events: none;
+}
+.my-survey .option.submitted p {
+	color: #999;
 }

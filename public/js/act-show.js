@@ -163,6 +163,8 @@ var fullimg = (function(){
 				fullimg.init(index)
 			}
 		})
+
+		utils.loading()
 	}, 'json')
 
 })()

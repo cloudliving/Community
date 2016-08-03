@@ -140,6 +140,10 @@
 				if(data['Code']==0){
 					$('.avatar img').attr('src',data['result']['avatar']);
 					$('.name').text(data['result']['nickname']);
+
+					if (data.result.sex == 1) {
+						$('.user').css('color', '#11aeff').removeClass('icon-user').addClass('icon-male')
+					}
 				}
 			},"json");
 		})();
