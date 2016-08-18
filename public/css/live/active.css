@@ -34,8 +34,8 @@
 .page-active .active-list .status-3 .wrap:before {background: url(../../../public/images/status-2.png) 0 0/100% 100% no-repeat;}
 .page-active .active-list .status-4 .wrap:before {background: url(../../../public/images/status-4.png) 0 0/100% 100% no-repeat;}
 .page-active .active-list .flex-wrap {display: -webkit-flex; display: flex; margin-top: .05rem;}
-
-
+.page-active .active-list .live {width: 70px; height: 18px; vertical-align: text-bottom; display: none; margin-left: .15rem;}
+.page-active .live-status-1 .live {display: inline;}
 
 /* 活动详情页面 */
 .page-active-detail .act-detail {padding-bottom: .75rem;}
@@ -61,7 +61,10 @@
 .page-active-detail .info-list .highlight {color: #fc7b5c;}
 
 .page-active-detail .act-show {display: block; margin-top: .15rem; padding: 0 .2rem; color: #313136; background: #fff;line-height: .8rem;}
-.page-active-detail .show-img {height: .6rem; width: .6rem; float: right; margin-top: .1rem; border-radius: 3px; background-size: cover;}
+.page-active-detail .show-img {height: .6rem; width: .6rem; float: right; margin-top: .1rem; border-radius: 3px; background-size: cover; margin-left: .2rem;}
+.page-active-detail .icon-live {float: right; color: #fe7495; display: none;}
+.page-active-detail .icon-live:before {font-size: 18px; position: relative; top: 1px; margin-right: 4px;}
+.page-active-detail .live-status-1 .icon-live {display: block;}
 
 .page-active-detail .text-wrap {overflow-y: auto;height: 4.16rem; padding: .25rem; color: #3b3a40; background: #fafafa; font-size: 14px; line-height: 1.8; text-align: justify;}
 .page-active-detail .text-wrap p {margin-bottom: .2rem;}

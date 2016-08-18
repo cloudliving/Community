@@ -35,19 +35,19 @@ $(function(){
 				                '<li class="item clearfix"><span class="left">联系电话</span><span class="right">{#phone#}</span></li>'+
 				            '</ul>'+
 				        '</div>'+
-				        '<div class="btn-wrap"><a href="http://weixin.cloudliving.net/index.php?m=CAPI&c=Index&a=write&join_id={#join_id#}" class="btn {#btnclass#}">{#btntext#}</a></div>'
+				        '<div class="btn-wrap"><a href="http://weixin.cloudliving.net/community_service.php?m=CAPI&c=Index&a=write&join_id={#join_id#}" class="btn {#btnclass#}">{#btntext#}</a></div>'
 
 		}
 
 	if (href.search('index.html') > 0) {
 		// 定位社区
-		$.get('http://vht.cloudliving.net/index.php?m=Community&c=Index&a=department&action=my_department', {uid:uid},function(data){
+		$.get('http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=department&action=my_department', {uid:uid},function(data){
 			var data = JSON.parse(data)
 			if (data.Code != '0') { $.tips({content:data.errorMessage + '请刷新重试'}); return}
 			$('.cummu').text(data.result[0].title)
 		})
 
-		$.get('http://vht.cloudliving.net/index.php?m=Community&c=Index&a=MassPT&action=mass_p_t', {uid:uid},function(res){
+		$.get('http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=MassPT&action=mass_p_t', {uid:uid},function(res){
 			var data = JSON.parse(res),
 				text
 			if (data.Code != '0') { $.tips({content:data.errorMessage + '请刷新重试'}); return}
@@ -89,7 +89,7 @@ $(function(){
 				form.on('submit', function(e){
 					e.preventDefault()
 
-					$.get('http://vht.cloudliving.net/index.php?m=Community&c=Index&a=MassPT&action=mass_p_t', {title: input.val(), uid: uid}, function(data){
+					$.get('http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=MassPT&action=mass_p_t', {title: input.val(), uid: uid}, function(data){
 						if (data.Code != 0) {$.tips({content: data.errorMessage}); return}
 						if (!data.result.massPTList) {$.tips({content: '暂无搜索结果'}); return}						
 
@@ -130,7 +130,7 @@ $(function(){
 	}
 
 	if (href.search('detail.html') > 0) {
-		$.get('http://vht.cloudliving.net/index.php?m=Community&c=Index&a=MassPT&action=mass_p_t_detail&id='+hash.id, {uid:uid}, function(res){
+		$.get('http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=MassPT&action=mass_p_t_detail&id='+hash.id, {uid:uid}, function(res){
 			var data = JSON.parse(res), text, str, btntext, btnclass
 			if (data.Code != '0') { $.tips({content:data.errorMessage + '请刷新重试'}); return}
 

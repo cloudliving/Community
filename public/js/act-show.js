@@ -91,7 +91,10 @@ var fullimg = (function(){
 
 ;(function(){
 	var template = {
-		title: '<p class="title">{#actTitle#}</p>',
+		title:  '<div class="hd">'+
+					'<p class="title">{#actTitle#}</p>'+
+					'<a href="live.html?id='+utils.parseHash().id+'" class="btn">进入直播现场</a>'+
+				'</div>',
 
 		item: 	'<li class="shows-item ui-table-tb clearfix">'+
 					'<p class="time">{#ctime#}</p>'+
@@ -161,6 +164,14 @@ var fullimg = (function(){
 				var index = $('img').index(target)
 
 				fullimg.init(index)
+			}
+		})
+
+		$('.btn').on('click', function(e){
+			var status = res.result.if_enter_live_status
+			if (status != '1') {
+				$.tips({content: status});
+				return false
 			}
 		})
 

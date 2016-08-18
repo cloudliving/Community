@@ -1,4 +1,6 @@
-.page-act-show .title {overflow: hidden; padding: 0 .2rem; color: #3a3a40; line-height: .8rem; text-align: center; white-space: nowrap;text-overflow: ellipsis;}
+.page-act-show .hd {padding: 0 .2rem .2rem .2rem;}
+.page-act-show .title {overflow: hidden; color: #3a3a40; line-height: .7rem; text-align: center; white-space: nowrap;text-overflow: ellipsis;}
+.page-act-show .btn {display: block; width: 100%; line-height: .66rem; text-align: center; background: #38d495; color: #fff;}
 
 .page-act-show .shows-item {margin-bottom: .25rem;padding: .3rem .2rem; background: #fff;}
 .page-act-show .shows-item:last-child {margin-bottom: 0;}

@@ -126,7 +126,7 @@
 	<script>
 		(function(){
 			//获得社区
-			$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=department&action=my_department", {uid:uid}, function(data){
+			$.get("http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=department&action=my_department", {uid:uid}, function(data){
 				if(data['Code']==0){
 					$('.community').text(data['result'][0]['title']);
 					utils.loading();
@@ -136,7 +136,7 @@
 			},"json");
 
 			//获得头像呢称
-			$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=user&action=my_info", {uid:uid}, function(data){
+			$.get("http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=user&action=my_info", {uid:uid}, function(data){
 				if(data['Code']==0){
 					$('.avatar img').attr('src',data['result']['avatar']);
 					$('.name').text(data['result']['nickname']);

@@ -2,10 +2,10 @@
 	var href = location.href,
 		template = {
 			index: 	'<!-- data-repeat -->'+
-					'<li class="item status-x.status_num" data-repeat="x in list" data-id="x.id">'+
+					'<li class="item status-x.status_num live-status-x.live_status" data-repeat="x in list" data-id="x.id">'+
 						'<a class="wrap" href="live/detail.html?id=x.id">'+
 							'<img src="x.image" class="thumb">'+
-							'<p class="title">x.title</p>'+
+							'<p class="title">x.title <img src="../public/images/live.png" alt="" class="live" /></p>'+
 							'<div class="flex-wrap">'+
 								'<p class="hot"><i class="icon-fire"></i> x.heat</p>'+
 								'<p class="commu"><i class="icon-house-2"></i> x.department_name</p>'+
@@ -14,7 +14,7 @@
 					'</li>'+
 					'<!-- end data-repeat -->',
 
-			detail: '<div class="act-detail open-key">'+
+			detail: '<div class="act-detail open-key live-status-{#live_status#}">'+
 						'<div class="hd">'+
 							'<img src="{#image#}" alt="" class="banner">'+
 							'<p class="title">{#title#}</p>'+
@@ -25,7 +25,7 @@
 								'</div>'+
 								'<div class="btn-wrap">	'+
 									'<button class="collect type{#is_keep#}"><i class="icon-star-{#is_keep#}"></i></button>'+
-									'<a href="http://vht.cloudliving.net/community_service.php?c=Index&a=write&join_id={#join_id#}" class="btn"></a>'+	
+									'<a href="http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=write&join_id={#join_id#}" class="btn"></a>'+	
 								'</div>'+
 							'</div>'+
 						'</div>'+
@@ -49,7 +49,7 @@
 							    '</ul>'+
 							'</div>'+
 
-				        	'<a class="act-show" href="act-show.html?id={#id#}">活动秀 <span class="show-img" style="background-image: url({#act_show_first_image#})"></span></a>'+
+				        	'<a class="act-show" href="act-show.html?id={#id#}">活动秀 <span class="show-img" style="background-image: url({#act_show_first_image#})"></span><i class="icon-live">直播中</i></a>'+
 
 				        	'<div class="cmt nodata">'+
     							'<p class="cmt-title">评论 <span class="cmt-title-num">(<span></span>)</span></p>'+
@@ -69,9 +69,9 @@
 		var id = utils.parseHash().id
 
 		// 热度+1
-		$.get('http://vht.cloudliving.net/index.php?m=Community&c=Index&a=act&action=act_plus_one_view', {aid: id, uid: uid})
+		$.get('http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=act&action=act_plus_one_view', {aid: id, uid: uid})
 
-		$.get('http://vht.cloudliving.net/index.php?m=Community&c=Index&a=act&action=act_detail&id='+id, {uid:uid},function(data){
+		$.get('http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=act&action=act_detail&id='+id, {uid:uid},function(data){
 			var data = JSON.parse(data), 
 				temp, 
 				obj = {},
@@ -88,6 +88,7 @@
 			obj.image = data.result.image
 			obj.is_keep = data.result.is_keep
 			obj.act_show_first_image = data.result.act_show_first_image
+			obj.live_status = data.result.live_status
 			obj.list = []
 			obj.list.push({key: '活动时间', value: data.result.setime})
 			obj.list.push({key: '报名截止时间', value: data.result.jtime})
@@ -103,6 +104,9 @@
 			temp = template.detail.format(obj)
 			document.querySelector('#wrapper').innerHTML = temp
 			document.querySelector('.text-wrap').innerHTML = data.result.brief
+			if (!data.result.act_show_first_image) {
+				$('.show-img').hide()
+			}
 
 			// 初始化选项卡
 			;(function(){
@@ -175,7 +179,7 @@
 				var community = data.result.department_title
 					href = $(this).attr('href') + '&uid=' + uid
 
-				$.get('http://vht.cloudliving.net/index.php?m=Community&c=Index&a=department&action=my_department', {uid:uid},function(data){
+				$.get('http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=department&action=my_department', {uid:uid},function(data){
 					if (data.Code != '0') { $.tips({content:data.errorMessage + '请刷新重试'}); return}
 
 					if (community != data.result[0].title) {
@@ -311,7 +315,7 @@
 		})
 	} else { // 首页
 		// 定位我的社区
-		$.get('http://vht.cloudliving.net/index.php?m=Community&c=Index&a=department&action=my_department', {uid:uid},function(data){
+		$.get('http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=department&action=my_department', {uid:uid},function(data){
 			var data = JSON.parse(data)
 			if (data.Code != '0') { $.tips({content:data.errorMessage + '请刷新重试'}); return}
 
@@ -325,8 +329,8 @@
 
 			var target = $(e.target),
 				url = target.hasClass('position') ? 
-					'http://vht.cloudliving.net/index.php?m=Community&c=Index&a=act&action=act' : 
-					'http://vht.cloudliving.net/index.php?m=Community&c=Index&a=act&action=act_all'
+					'http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=act&action=act' : 
+					'http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=act&action=act_all'
 
 			$.get(url, {uid:uid},function(data){
 				if (data.Code != '0') { $.tips({content:data.errorMessage + '请刷新重试'}); return}

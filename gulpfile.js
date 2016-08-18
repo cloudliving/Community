@@ -21,10 +21,8 @@ gulp.task("moveJs", function() {
 	return gulp.src(["./public/js/*.js"])
                 .pipe(replace(/(\.\.\/){0,4}public/g,'http://cloudliving-img.b0.upaiyun.com/static/Home/Community'))
                 // 更换正式接口
-                .pipe(replace('vht.cloudliving.net/index.php?m=Community&c=Index', 'weixin.cloudliving.net/community_service.php?c=Index'))
+                .pipe(replace('vht.cloudliving.net', 'weixin.cloudliving.net'))
                 // 替换报名链接
-                .pipe(replace('vht.cloudliving.net/community_service.php?c=Index&a=write', 'weixin.cloudliving.net/index.php?m=CAPI&c=Index&a=write'))
-                .pipe(replace('vht.cloudliving.net/community_service.php', 'weixin.cloudliving.net/community_service.php'))
                 .pipe(uglify())
 	            .pipe(gulp.dest("./build/public/js"));
 });

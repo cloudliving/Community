@@ -59,7 +59,7 @@
 	<script>
 		(function(){
 			var para = utils.parseHash();
-			$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=act&action=my_act_detail",{id: para['id'],uid: uid},function(data){
+			$.get("http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=act&action=my_act_detail",{id: para['id'],uid: uid},function(data){
 				if(data['Code']==0){
 					var s = '<p class="title">'+data['result']['title']+'</p>'+
 							'<p class="ctime">'+data['result']['ctime']+'</p>'+

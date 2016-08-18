@@ -32,7 +32,7 @@
 	<script src="../../public/lib/extends.js"></script>
 	<script>
 		(function(){
-			$.get("http://vht.cloudliving.net/index.php?m=Community&c=Index&a=department&action=get_department",{uid:uid},function(data){
+			$.get("http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=department&action=get_department",{uid:uid},function(data){
 				//请求数据成功
 				if(data['Code']==0){
 					var s = '<!-- data-repeat -->'+

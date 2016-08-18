@@ -47,7 +47,7 @@
                             '<!-- end data-repeat -->',
                 str
 
-            $.get('http://vht.cloudliving.net/index.php?m=Community&c=Index&a=MassPT&action=my_mass_p_t', {uid: uid}, function(res){
+            $.get('http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=MassPT&action=my_mass_p_t', {uid: uid}, function(res){
                 var data = JSON.parse(res),
                     text
                 if (data.Code != '0') { $.tips({content:data.errorMessage + '请刷新重试'}); return}
