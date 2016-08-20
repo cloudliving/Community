@@ -1,5 +1,5 @@
 var template = 		'<p class="title">{#actTitle#}</p>'+
-					'<video id="my-video" class="video-js" controls preload="auto" poster="../../public/images/demo-1.png">'+
+					'<video id="my-video" class="video-js" controls preload="auto" poster="../../public/images/poster.png">'+
 					    '<source src="{#pull_url#}" type="application/x-mpegURL">'+
 					'</video>'+
 					'<p class="hint">注意<br>此直播仅提供报名参与用户观看,其他人员无法看到</p>',

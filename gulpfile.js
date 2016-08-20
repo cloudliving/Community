@@ -51,8 +51,7 @@ gulp.task('replace', function() {
     gulp.src(['./html/*.html', './html/**/*.html', './html/**/**/*.html'])
         .pipe(replace(/(\.\.\/){0,4}public/g, 'http://cloudliving-img.b0.upaiyun.com/static/Home/Community'))
         // 更换正式接口
-        .pipe(replace('vht.cloudliving.net/index.php?m=Community&c=Index', 'weixin.cloudliving.net/community_service.php?c=Index'))
-        .pipe(replace('vht.cloudliving.net/community_service.php', 'weixin.cloudliving.net/community_service.php'))
+        .pipe(replace('vht.cloudliving.net', 'weixin.cloudliving.net'))
         .pipe(replace(/src=".+\.js/g, function(a){return a+'?v='+time}))
         .pipe(build({
             'css':'http://cloudliving-img.b0.upaiyun.com/static/Home/Community/css/community.min.css?v='+time
