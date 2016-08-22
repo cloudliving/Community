@@ -11,10 +11,10 @@ var uglify = require('gulp-uglify');
 gulp.task("concatCss", function() {
 	return gulp.src(["./public/css/*.css", "./public/css/**/*.css"])
                 // 正式
-                    // .pipe(replace(/(\.\.\/){0,4}public/g,'http://cloudliving-img.b0.upaiyun.com/static/Home/Community'))
+                    .pipe(replace(/(\.\.\/){0,4}public/g,'http://cloudliving-img.b0.upaiyun.com/static/Home/Community'))
 
                 // 测试    
-                    .pipe(replace(/(\.\.\/){0,4}public/g,'http://dzq.cloudliving.net/sq/public'))
+                    // .pipe(replace(/(\.\.\/){0,4}public/g,'http://dzq.cloudliving.net/sq/public'))
 
 		        .pipe(concat("community.min.css"))
 		        .pipe(csso())
@@ -25,11 +25,11 @@ gulp.task("concatCss", function() {
 gulp.task("moveJs", function() {
 	return gulp.src(["./public/js/*.js"])
                 // 正式
-                    // .pipe(replace(/(\.\.\/){0,4}public/g,'http://cloudliving-img.b0.upaiyun.com/static/Home/Community'))
-                    // .pipe(replace('vht.cloudliving.net', 'weixin.cloudliving.net'))
+                    .pipe(replace(/(\.\.\/){0,4}public/g,'http://cloudliving-img.b0.upaiyun.com/static/Home/Community'))
+                    .pipe(replace('vht.cloudliving.net', 'weixin.cloudliving.net'))
 
                 // 测试
-                    .pipe(replace(/(\.\.\/){0,4}public/g,'http://dzq.cloudliving.net/sq/public'))
+                    // .pipe(replace(/(\.\.\/){0,4}public/g,'http://dzq.cloudliving.net/sq/public'))
 
                 .pipe(uglify())
 	            .pipe(gulp.dest("./build/public/js"));
@@ -58,19 +58,19 @@ gulp.task('moveimg', function() {
 gulp.task('replace', function() {
     gulp.src(['./html/*.html', './html/**/*.html', './html/**/**/*.html'])
         // 正式
-            // .pipe(replace(/(\.\.\/){0,4}public/g, 'http://cloudliving-img.b0.upaiyun.com/static/Home/Community'))
-            // .pipe(replace('vht.cloudliving.net', 'weixin.cloudliving.net'))
+            .pipe(replace(/(\.\.\/){0,4}public/g, 'http://cloudliving-img.b0.upaiyun.com/static/Home/Community'))
+            .pipe(replace('vht.cloudliving.net', 'weixin.cloudliving.net'))
 
         // 测试
-            .pipe(replace(/(\.\.\/){0,4}public/g, 'http://dzq.cloudliving.net/sq/public'))
+            // .pipe(replace(/(\.\.\/){0,4}public/g, 'http://dzq.cloudliving.net/sq/public'))
 
         .pipe(replace(/src=".+\.js/g, function(a){return a+'?v='+time}))
         .pipe(build({
             // 正式
-                // 'css':'http://cloudliving-img.b0.upaiyun.com/static/Home/Community/css/community.min.css?v='+time
+                'css':'http://cloudliving-img.b0.upaiyun.com/static/Home/Community/css/community.min.css?v='+time
 
             // 测试
-                'css':'http://dzq.cloudliving.net/sq/public/css/community.min.css?v='+time
+                // 'css':'http://dzq.cloudliving.net/sq/public/css/community.min.css?v='+time
         }))
         .pipe(gulp.dest('./build/html/'));
 });
@@ -91,6 +91,7 @@ gulp.task('uploadtest-html', function(){
 })
 gulp.task('uploadtest-public', function(){
     gulp.src('./build/public/**')
+    // gulp.src(['./build/public/**', '!./build/public/images/**'])
         .pipe(sftp({
             host: '120.27.161.102',
             port: 22,

@@ -218,34 +218,16 @@
 @keyframes fadeoutL {0% {opacity: 1; transform: translateX(0);}
  100% {opacity: 0; transform: translateX(-100px);}}
 /* 弹跳 */
-@-webkit-keyframes bounce {0%,
- 20%,
- 50%,
- 80%,
- 100% {-webkit-transform: translateY(0);}
- 40% {-webkit-transform: translateY(-30px);}
- 60% {-webkit-transform: translateY(-15px);}}
-@-moz-keyframes bounce {0%,
- 20%,
- 50%,
- 80%,
- 100% {-moz-transform: translateY(0);}
- 40% {-moz-transform: translateY(-30px);}
- 60% {-moz-transform: translateY(-15px);}}
-@-ms-keyframes bounce {0%,
- 20%,
- 50%,
- 80%,
- 100% {-ms-transform: translateY(0);}
- 40% {-ms-transform: translateY(-30px);}
- 60% {-ms-transform: translateY(-15px);}}
-@keyframes bounce {0%,
- 20%,
- 50%,
- 80%,
- 100% {transform: translateY(0);}
- 40% {transform: translateY(-30px);}
- 60% {transform: translateY(-15px);}}
+@-webkit-keyframes bounce {
+	0% {-webkit-transform: scale(.8);}
+	50% {-webkit-transform: scale(1.4);}
+	100% {-webkit-transform: scale(1);}
+}
+@keyframes bounce {
+	0% {transform: scale(.8);}
+	50% {transform: scale(1.4);}
+	100% {transform: scale(1);}
+}
 /* 弹入 */
 @-webkit-keyframes bouncein {0% {opacity: 0; -webkit-transform: scale(.3);}
  50% {opacity: 1; -webkit-transform: scale(1.05);}

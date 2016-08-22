@@ -1,33 +1,33 @@
 .page-wish,
 .page-wish body {height: 100%;}
-.page-wish body {background: #231815 url(../../../public/images/wish-bg-2.png) no-repeat; background-size: cover;}
-.page-wish #wrapper {position: relative; min-height: 100%; background: url(../../../public/images/wish-bg-1.png) no-repeat; background-position: bottom; background-size: 100%;}
+.page-wish body {background: #231815;}
+.page-wish #wrapper {position: relative; min-height: 100%; background: url(../../../public/images/wish-bg-1.png) no-repeat; background-size: 100% 100%;}
 
 
 
 .page-wish .star {position: absolute; width: 1.6rem; height: 1.6rem; background-repeat: no-repeat; background-position: center; background-size: .5rem;}
 .page-wish .star.status-1 {background-size: contain;}
 
-.page-wish .star-1 {top: 3.6rem; left: .6rem; background-image: url(../../../public/images/stars/1.png);}
-.page-wish .star-2 {top: 5.9rem; left: 4.15rem; background-image: url(../../../public/images/stars/2.png);}
-.page-wish .star-3 {top: 3.9rem; left: 4.4rem; background-image: url(../../../public/images/stars/3.png);}
-.page-wish .star-4 {top: 1.5rem; left: 4.65rem; background-image: url(../../../public/images/stars/4.png);}
-.page-wish .star-5 {top: 5.4rem; left: 1.3rem; background-image: url(../../../public/images/stars/5.png);}
-.page-wish .star-6 {top: .9rem; left: 1.95rem; background-image: url(../../../public/images/stars/6.png);}
-.page-wish .star-7 {top: 4.65rem; left: 2.8rem; background-image: url(../../../public/images/stars/7.png);}
-.page-wish .star-8 {top: 2.4rem; left: 3.6rem; background-image: url(../../../public/images/stars/8.png);}
-.page-wish .star-9 {top: 3.05rem; left: 2.1rem; background-image: url(../../../public/images/stars/9.png);}
-.page-wish .star-10 {top: 1.6rem; left: .5rem; background-image: url(../../../public/images/stars/10.png);}
-.page-wish .star-1.status-1 {background-image: url(../../../public/images/stars/11.png);}
-.page-wish .star-2.status-1 {background-image: url(../../../public/images/stars/12.png);}
-.page-wish .star-3.status-1 {background-image: url(../../../public/images/stars/13.png);}
-.page-wish .star-4.status-1 {background-image: url(../../../public/images/stars/14.png);}
-.page-wish .star-5.status-1 {background-image: url(../../../public/images/stars/15.png);}
-.page-wish .star-6.status-1 {background-image: url(../../../public/images/stars/16.png);}
-.page-wish .star-7.status-1 {background-image: url(../../../public/images/stars/17.png);}
-.page-wish .star-8.status-1 {background-image: url(../../../public/images/stars/18.png);}
-.page-wish .star-9.status-1 {background-image: url(../../../public/images/stars/19.png);}
-.page-wish .star-10.status-1 {background-image: url(../../../public/images/stars/20.png);}
+.page-wish .star-1 {top: 3.6rem; left: .6rem; background-image: url(../../../public/images/stars/11.png);}
+.page-wish .star-2 {top: 5.9rem; left: 4.15rem; background-image: url(../../../public/images/stars/12.png);}
+.page-wish .star-3 {top: 3.9rem; left: 4.4rem; background-image: url(../../../public/images/stars/13.png);}
+.page-wish .star-4 {top: 1.5rem; left: 4.65rem; background-image: url(../../../public/images/stars/14.png);}
+.page-wish .star-5 {top: 5.4rem; left: 1.3rem; background-image: url(../../../public/images/stars/15.png);}
+.page-wish .star-6 {top: .9rem; left: 1.95rem; background-image: url(../../../public/images/stars/16.png);}
+.page-wish .star-7 {top: 4.65rem; left: 2.8rem; background-image: url(../../../public/images/stars/17.png);}
+.page-wish .star-8 {top: 2.4rem; left: 3.6rem; background-image: url(../../../public/images/stars/18.png);}
+.page-wish .star-9 {top: 3.05rem; left: 2.1rem; background-image: url(../../../public/images/stars/19.png);}
+.page-wish .star-10 {top: 1.6rem; left: .5rem; background-image: url(../../../public/images/stars/20.png);}
+.page-wish .star-1.status-1 {background-image: url(../../../public/images/stars/1.png);}
+.page-wish .star-2.status-1 {background-image: url(../../../public/images/stars/2.png);}
+.page-wish .star-3.status-1 {background-image: url(../../../public/images/stars/3.png);}
+.page-wish .star-4.status-1 {background-image: url(../../../public/images/stars/4.png);}
+.page-wish .star-5.status-1 {background-image: url(../../../public/images/stars/5.png);}
+.page-wish .star-6.status-1 {background-image: url(../../../public/images/stars/6.png);}
+.page-wish .star-7.status-1 {background-image: url(../../../public/images/stars/7.png);}
+.page-wish .star-8.status-1 {background-image: url(../../../public/images/stars/8.png);}
+.page-wish .star-9.status-1 {background-image: url(../../../public/images/stars/9.png);}
+.page-wish .star-10.status-1 {background-image: url(../../../public/images/stars/10.png);}
 
 
 
@@ -38,32 +38,35 @@
 .page-wish .ctn.status-0 .link {display: none;}
 .page-wish .ctn.status-1 .submit {display: none;}
 
-.page-wish .btn {display: inline-block; width: 1.8rem; height: .6rem; margin-top: .2rem; color: #fff; border-radius: 5px;background: rgba(34, 193, 255, .4); font-size: 14px; line-height: .6rem;}
-.page-wish .btn:active {background: rgba(34, 193, 255, .6);}
+.page-wish .ctn .btn {display: inline-block; width: 2.2rem; height: .76rem; margin-top: .2rem; color: #fff; border-radius: 5px;background: rgba(0, 160, 233, .8); font-size: .34rem; line-height: .76rem; box-shadow: 0 0 .51rem .13rem rgba(0, 160, 233, .35)}
+.page-wish .ctn .btn:active {background: rgba(0, 160, 233, .9);}
 
 .page-wish .others {margin-top: .6rem;}
 .page-wish .others .title {width: 1.2rem;}
 
-.page-wish .others .list {margin-top: .26rem; height: .54rem; overflow: hidden;}
-.page-wish .others .item {font-size: .18rem; color: rgba(255,255,255,.7); line-height: .27rem;}
+.page-wish .others .list {margin-top: .36rem; height: .66rem; overflow: hidden;}
+.page-wish .others .item {font-size: .22rem; color: rgba(255,255,255,.7); line-height: .33rem;}
+.page-wish .others span {color: #cb5d02;}
 
 
-
-.page-wish .shadow {display: flex; display: -webkit-flex; position: fixed; width: 100%; height: 100%; left: 0; top: 0; z-index: 100; background: rgba(0,0,0,.4); align-items: center; -webkit-align-items: center; justify-content: center; -webkit-justify-content: center;}
-.page-wish .shadow .box {width: 4rem; height: 2.5rem; text-align: center; background: rgba(20,116,153,.8); color: #6bd0f8; border-radius: 5px;}
-.page-wish .shadow .txt1 {font-size: .22rem; margin-top: .55rem;}
-.page-wish .shadow .txt2 {font-size: .18rem; margin-top: .2rem;}
-.page-wish .shadow .btn {margin-top: .45rem; background: #147499;}
-.page-wish .shadow .btn:active {background: #1781aa;}
+.page-wish .shadow {display: flex; display: -webkit-flex; position: fixed; width: 100%; height: 100%; left: 0; top: 0; z-index: 100; padding: 0 .5rem; background: rgba(0,0,0,.4); align-items: center; -webkit-align-items: center; justify-content: center; -webkit-justify-content: center;}
+.page-wish .shadow .box {width: 100%; height: 3.2rem; padding: 0 .1rem; text-align: center; background: rgba(20,116,153,.8); color: #6bd0f8; border-radius: 5px;}
+.page-wish .shadow .btn {width: 1rem; height: 1rem; margin-top: .4rem;}
+.page-wish .shadow .btn.status-1 {background: url(../../../public/images/wish-btn-1.png) no-repeat; background-size: contain;}
+.page-wish .shadow .btn.status-0 {background: url(../../../public/images/wish-btn-0.png) no-repeat; background-size: contain;}
+.page-wish .shadow .txt1 {font-size: .28rem; margin-top: .55rem;}
+.page-wish .shadow .txt2 {font-size: .22rem; margin-top: .2rem;}
 
 
 .page-wish .a-bouncein {
 	-webkit-animation-delay: .8s;
-	-o-animation-delay: .8s;
 	animation-delay: .8s;
 }
 .page-wish .a-fadeinB {
 	-webkit-animation-delay: 1.6s;
-	-o-animation-delay: 1.6s;
 	animation-delay: 1.6s;
+}
+.page-wish .a-bounce {
+	-webkit-animation-duration: .6s;
+	animation-duration: .6s
 }

@@ -2,7 +2,8 @@
 	var 
 		url = {
 			view: 'http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=wish&action=online_wish_list',
-			submit: 'http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=wish&action=submit_wish'
+			submit: 'http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=wish&action=submit_wish',
+			stat: 'http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=wish&action=online_wish_open_num_plus_one'
 		},
 		datas, stars,
 		wrap = $('#wrapper'),
@@ -19,7 +20,6 @@
 					'</div>'+
 
 					'<div class="ctn status-{#is_selected#} a-fadeinB">'+
-						'<p>星星可以点亮多颗</p>'+
 
 						'<button class="btn submit">许下心愿</button>'+
 						'<a href="mywish.html" class="btn link ">我的心愿单</a>'+
@@ -29,7 +29,7 @@
 							'<div class="list j-marquee">'+
 								'<ul>'+
 									'<!-- data-repeat -->'+
-										'<li class="item" data-repeat="x in others">x.name 许下 x.total 个心愿</li>'+
+										'<li class="item" data-repeat="x in others"><span>x.name</span> 许下 <span>x.total</span> 个心愿</li>'+
 									'<!-- end data-repeat -->'+ '\n' +
 								'</ul>'+
 							'</div>'+
@@ -40,7 +40,7 @@
 						'<div class="box">'+
 							'<p class="txt1">{#title#}</p>'+
 							'<p class="txt2">{#descript#}</p>'+
-							'<button class="btn">{#status_text#}</button>'+
+							'<button class="btn {#status#}"></button>'+
 						'</div>'+
 					'</div>'
 		}
@@ -66,11 +66,17 @@
 		})
 
 		stars.on('tap', function(){
-			var index = $(this).index()
+			var that = $(this),
+				index = that.index()
+
+			that.removeClass('a-bouncein').addClass('a-bounce')
+			setTimeout(function(){
+				that.removeClass('a-bounce')
+			}, 1000)
 			alertShadow(index, datas[index])
 		})
 
-		submit.on('tap', function(){
+		submit.on('click', function(){
 			if (stars.filter('.status-1').length == 0) {
 				$.tips({content: '请先点亮心愿星'})
 				return
@@ -93,6 +99,9 @@
 			}, 'json')
 		})
 
+		// 访问量统计
+		$.get(url.stat, {wid: res.result.wid, uid: uid})
+
 		utils.loading()
 		marquee()
 	}, 'json')
@@ -104,9 +113,10 @@
 		var 
 			star = stars.eq(index), 
 			selected = star.hasClass('status-1'),
-			status_text = selected ? '熄灭它' : '点亮它'
+			status = selected ? 'status-1' : 'status-0'
 
-		data.status_text = status_text
+		data.status = status
+
 		body.append(template.shadow.format(data))
 
 		$('.shadow').on('tap', function(e){
@@ -124,7 +134,7 @@
 				that.remove()
 
 				if ($('.ctn').hasClass('status-1')) {
-					$.tips({content: '您以提交过心愿单, 无法更改'})
+					$.tips({content: '你的心愿单已收录，无法修改'})
 				} else {
 					selected ? star.removeClass('status-1') : star.addClass('status-1')
 				}
@@ -159,16 +169,3 @@
 		}, 50)
 	}
 })()
-
-
-
-
-
-// event
-// var stars = $('.star')
-
-// stars.on('tap', function(){
-// 	var index = $(this).index()
-
-// 	alertwindow(index, datas[index])
-// })

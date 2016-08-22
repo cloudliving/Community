@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="wish-all">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -15,19 +15,19 @@
 	<link rel="stylesheet" href="../../public/css/wish/allwish.css">
 	<!-- endbuild -->
 </head>
-<body class="wish-all">
+<body>
 	
 	<!-- 内容容器 所有的内容都要放在这个div下 -->
 	<div id="wrapper">
-		<div class="mywish-head ui-border-b">以下是你许下的<span class="total">6</span>个心愿</div>
+		<div class="mywish-head">以下是你许下的<span class="total">6</span>个心愿</div>
 		<div class="wish">
-			<!-- <div class="item ui-border-b">
+			<!-- <div class="item">
 				<p>我想和孩子一起参与一场亲子活动</p>
 				<p>此心愿还有<span>8</span>人许下</p>
 			</div> -->
 		</div>
-		<div class="mywish-viewall">
-			<a href="allwish.html">查看所有心愿被许下的情况</a>
+		<div class="viewall">
+			<a href="allwish.html">查看所有心愿</a>
 		</div>
 	</div>
 
@@ -40,7 +40,7 @@
 				if (data.Code != 0) {$.tips({content: data.errorMessage + '请刷新重试'}); return}
 
 				var s = '<!-- data-repeat -->'+
-					'<div class="item ui-border-b" data-repeat="x in wishList">'+
+					'<div class="item" data-repeat="x in wishList">'+
 						'<p>x.title</p>'+
 						'<p>此心愿还有<span>x.number</span>人许下</p>'+
 					'</div>'+
