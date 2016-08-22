@@ -179,5 +179,3 @@ var fullimg = (function(){
 	}, 'json')
 
 })()
-
-

@@ -3,9 +3,9 @@
 		template = {
 			index: 	'<!-- data-repeat -->'+
 					'<li class="item status-x.status_num live-status-x.live_status" data-repeat="x in list" data-id="x.id">'+
-						'<a class="wrap" href="live/detail.html?id=x.id">'+
+						'<a class="wrap" href="detail.html?id=x.id">'+
 							'<img src="x.image" class="thumb">'+
-							'<p class="title">x.title <img src="../public/images/live.png" alt="" class="live" /></p>'+
+							'<p class="title">x.title <img src="../../public/images/live.png" alt="" class="live" /></p>'+
 							'<div class="flex-wrap">'+
 								'<p class="hot"><i class="icon-fire"></i> x.heat</p>'+
 								'<p class="commu"><i class="icon-house-2"></i> x.department_name</p>'+

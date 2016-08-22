@@ -1,34 +1,48 @@
 <!DOCTYPE html>
-<html lang="en" class="page-active">
+<html lang="en" class="page-index">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	<meta name="format-detection" content="telphone=no, email=no"/>
-	<title>生活</title>
+	<title>首页</title>
 	
 	<script src="../public/lib/flexible.js"></script>
 	<link rel="stylesheet" href="../public/lib/frozen.min.css">
 	<!-- build:css -->
 	<link rel="stylesheet" href="../public/css/common.css">
-	<link rel="stylesheet" href="../public/css/live/active.css">
+	<link rel="stylesheet" href="../public/css/index/index.css">
 	<!-- endbuild -->
 </head>
 <body>
 	
-	<div id="wrapper">
+	<div id="wrapper" data-loading="complate">
 		<a href="thumb/detail.html">
 			<img class="banner" src="../public/images/banner.jpg" alt="">
 		</a>
 
-		<div class="range">
-			<a class="current all finished" href="javascript:">全市范围</a>
-			<span class="line">|</span>
-			<a class="position finished" href="javascript:">我的社区</a>
+		<div class="row align-center nav">
+			<div class="col">
+				<a href="live/act-list.html">
+					<img class="icon-1" src="../public/images/index-icon-1.png" alt="">
+					<p>社区活动</p>
+				</a>
+			</div>
+			<div class="col">
+				<a href="wish/wish.html">
+					<img class="icon-2" src="../public/images/index-icon-2.png" alt="">
+					<p>社区心愿单</p>
+				</a>
+			</div>
 		</div>
 
-		<ul class="active-list"></ul>
+		<div class="bar align-center">为了社区生活的更美好而努力</div>
+
+		<div class="bgfff">
+			<p class="billboard"><i></i>推荐活动</p>
+			<ul class="active-list"></ul>
+		</div>
 
 		<div class="g-bottom-nav ui-border-t">
 			<ul class="clearfix">
@@ -59,6 +73,36 @@
 	<script src="../public/lib/zepto.min.js"></script>
 	<script src="../public/lib/frozen.min.js"></script>
 	<script src="../public/lib/extends.js"></script>
-	<script src="../public/js/live-active.js"></script>
+	<script>
+		var 
+			wrap = $('.active-list'),
+			url = 'http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=act&action=act_recommend',
+			template = '<!-- data-repeat -->'+
+						'<li class="item status-x.status_num live-status-x.live_status" data-repeat="x in actList" data-id="x.id">'+
+							'<a class="wrap" href="live/detail.html?id=x.id">'+
+								'<img src="x.image" class="thumb">'+
+								'<p class="title">x.title <img src="../public/images/live.png" alt="" class="live" /></p>'+
+								'<div class="flex-wrap">'+
+									'<p class="hot"><i class="icon-fire"></i> x.heat</p>'+
+									'<p class="commu"><i class="icon-house-2"></i> x.department_name</p>'+
+								'</div>'+
+							'</a>'+
+						'</li>'+
+						'<!-- end data-repeat -->',
+			str
+
+		$.get(url, {uid: uid}, function(res){
+			if (res.Code != 0) {
+				$.tips({content: errorMessage})
+				return false
+			}
+
+			str = res.result.actList ? template.format(res.result) : '<p class="none">暂无推荐活动</p>'
+
+			wrap.append(str)
+
+			utils.loading()
+		}, 'json')
+	</script>
 </body>
 </html>
