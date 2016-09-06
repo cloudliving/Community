@@ -1,14 +1,16 @@
-.wish-all {height: 100%;}
-.wish-all body {
-	background: url('../../../public/images/wish-bg-2.png') no-repeat top center;
-	background-size: 100% auto;
-	background-attachment: fixed;
-	padding-bottom: 0.15rem;
+.wish-all .shadow {
+	position: fixed;
+	width: 100%;
 	height: 100%;
+	left: 0;
+	top: 0;
+	background: url('../../../public/images/wish-bg-2.png') no-repeat;
+	background-size: 100% auto;
 }
 .wish-all #wrapper {
-	height: 100%;
-	overflow-y: auto;
+	position: relative;
+	z-index: 2;
+	padding: .15rem 0;
 }
 .wish-all .wish {
 	padding: 0 0.2rem;
@@ -22,6 +24,9 @@
 	background-repeat: no-repeat;
 	background-size: 1.3rem 1.3rem;
 	background-position: -0.1rem -0.2rem;
+}
+.wish-all .item:first-child {
+	margin-top: 0;
 }
 .wish-all .item.greybg {
 	background-color: rgba(255, 255, 255, 0.3);

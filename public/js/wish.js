@@ -146,20 +146,18 @@
 		var 
 			wrap = $('.j-marquee'),
 			ctn = wrap.children('ul'),
-			wh = wrap.height(),
-			ch = ctn.height(),
+  			ch = ctn.height(),
 			h = 0 // 已滚动的距离
 			offset = .8 // 单次滚动距离
 
-		console.log(wh)
-		console.log(ch)
+		ctn.append(ctn.children('li').clone())
 
 		setTimeout(function(){
 			ctn.css({
 				transform: 'translateY(-'+h+'px)'
 			})
 
-			if (h + wh > ch) {
+			if (h > ch ) {
 				h = 0
 			} else {
 				h += offset

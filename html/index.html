@@ -18,6 +18,7 @@
 <body>
 	
 	<div id="wrapper" data-loading="complate">
+
 		<a href="thumb/detail.html">
 			<img class="banner" src="../public/images/banner.jpg" alt="">
 		</a>
@@ -90,6 +91,16 @@
 						'</li>'+
 						'<!-- end data-repeat -->',
 			str
+
+		// 定位我的社区
+		$.get('http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=department&action=my_department', {uid:uid},function(data){
+			var data = JSON.parse(data)
+			if (data.Code != '0') { $.tips({content:data.errorMessage + '请刷新重试'}); return}
+
+			if (!data.result) location.href = 'select/index.html?uid=' + uid
+		})
+
+
 
 		$.get(url, {uid: uid}, function(res){
 			if (res.Code != 0) {

@@ -25,7 +25,7 @@
 								'</div>'+
 								'<div class="btn-wrap">	'+
 									'<button class="collect type{#is_keep#}"><i class="icon-star-{#is_keep#}"></i></button>'+
-									'<a href="http://vht.cloudliving.net/community_service.php?m=Community&c=Index&a=write&join_id={#join_id#}" class="btn"></a>'+	
+									'<a href="http://vht.cloudliving.net/community_service.php?&c=Index&a=write&join_id={#join_id#}" class="btn"></a>'+	
 								'</div>'+
 							'</div>'+
 						'</div>'+
@@ -319,7 +319,7 @@
 			var data = JSON.parse(data)
 			if (data.Code != '0') { $.tips({content:data.errorMessage + '请刷新重试'}); return}
 
-			data.result ? $('.position').text(data.result[0].title) : location.href = 'select/index.html?uid=' + uid
+			data.result ? $('.position').text(data.result[0].title) : location.href = '../select/index.html?uid=' + uid
 		})
 
 		// 切换范围
