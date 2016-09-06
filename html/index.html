@@ -19,9 +19,17 @@
 	
 	<div id="wrapper" data-loading="complate">
 
-		<a href="thumb/detail.html">
+		<div class="ui-slider">
+		    <ul class="ui-slider-content">
+<!-- 		        <li class="current"><a href="#"><span style="background-image:url(http://placehold.sinaapp.com/?640*200)"></span></a></li>
+		        <li><span style="background-image:url(http://placehold.sinaapp.com//?640*200)"></span></li>
+		        <li><span style="background-image:url(http://placehold.sinaapp.com//?640*200)"></span></li> -->
+		    </ul>
+		</div>
+
+<!-- 		<a href="thumb/detail.html">
 			<img class="banner" src="../public/images/banner.jpg" alt="">
-		</a>
+		</a> -->
 
 		<div class="row align-center nav">
 			<div class="col">
@@ -101,7 +109,7 @@
 		})
 
 
-
+		// 推荐活动
 		$.get(url, {uid: uid}, function(res){
 			if (res.Code != 0) {
 				$.tips({content: errorMessage})
@@ -114,6 +122,27 @@
 
 			utils.loading()
 		}, 'json')
+
+		// 轮播图
+		;(function(){
+			var wrap = $('.ui-slider-content'),
+				url = 'http://vht.cloudliving.net/community_service.php?c=Index&a=banner&action=banner_list',
+				template = '<!-- data-repeat --><li class="current" data-repeat="x in bannerList"><a href="x.url"><span style="background-image:url(x.image_url)"></span></a></li><!-- end data-repeat -->'
+
+			$.get(url, {uid: uid}, function(res){
+				if (res.Code != 0) {$.tips({content: '轮播图加载失败, 请刷新重试'}); return}
+
+				wrap.append(template.format(res.result))
+
+				new fz.Scroll('.ui-slider', {
+						    role: 'slider',
+						    indicator: true,
+						    autoplay: true,
+						    interval: 3000
+						});
+
+			},'json')
+		})()
 	</script>
 </body>
 </html>

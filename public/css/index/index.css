@@ -36,3 +36,5 @@
 .page-index .active-list .flex-wrap {display: -webkit-flex; display: flex; margin-top: .05rem;}
 .page-index .active-list .live {width: 70px; height: 18px; vertical-align: text-bottom; display: none; margin-left: .15rem;}
 .page-index .live-status-1 .live {display: inline;}
+
+.page-index .ui-slider {padding-top: 2.5rem; background: #ddd;}
